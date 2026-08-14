@@ -1,11 +1,15 @@
 {
   "expo": {
-    "name": "expo-app",
-    "slug": "expo-app",
+    "scheme": "servio",
+    "name": "servio",
+    "slug": "servio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "experiments": {
+      "typedRoutes": true
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +22,15 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "53daacd4-ae95-4c21-9aa1-c395af954842"
+      }
+    },
+    "owner": "ivs-team",
+    "plugins": ["expo-router"]
   }
 }
