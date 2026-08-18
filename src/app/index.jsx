@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import TestImg from "../../assets/icon.png";
+import { Link } from "expo-router";
 
 const Home = () => {
   return (
@@ -19,9 +20,12 @@ const Home = () => {
         consequuntur iure esse.
       </Text>
 
-      <View style={styles.card}>
-        <Text>hello, this is a card</Text>
-      </View>
+      <Link href="/dashboard">
+        <Text>Go to dashboard</Text>
+      </Link>
+      <Link href="/wallet">
+        <Text>View wallet</Text>
+      </Link>
     </View>
   );
 };
