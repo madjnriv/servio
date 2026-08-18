@@ -1,29 +1,81 @@
 import { StyleSheet, useColorScheme } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Tabs } from "expo-router";
 import { Colors } from "../../constants/colors";
+import { Ionicons } from "@expo/vector-icons";
 
-const RootLayout = () => {
+const TabsLayout = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
-
   return (
-    <Stack
+    <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: theme.navBackground },
-        headerTintColor: theme.title,
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: theme.navBackground,
+          paddingTop: 10,
+          height: 90,
+        },
+        tabBarActiveTintColor: theme.iconColorFocused,
+        tabBarInactiveTintColor: theme.iconColor,
       }}
     >
-      <Stack.Screen name="dashboard" options={{ title: "Dashboard" }} />
-      <Stack.Screen name="wallet" options={{ title: "Wallet" }} />
-      <Stack.Screen
-        name="bookings"
-        options={{ title: "Bookings", headerShown: false }}
+      <Tabs.Screen
+        name="dashboard"
+        options={{
+          title: "Dashboard",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              size={24}
+              name={focused ? "home" : "home-outline"}
+              color={focused ? theme.iconColorFocused : theme.iconColor}
+            />
+          ),
+        }}
       />
-    </Stack>
+      <Tabs.Screen
+        name="wallet"
+        options={{
+          title: "Wallet",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              size={24}
+              name={focused ? "wallet" : "wallet-outline"}
+              color={focused ? theme.iconColorFocused : theme.iconColor}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="bookings"
+        options={{
+          title: "Bookings",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              size={24}
+              name={focused ? "calendar" : "calendar-outline"}
+              color={focused ? theme.iconColorFocused : theme.iconColor}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              size={24}
+              name={focused ? "person" : "person-outline"}
+              color={focused ? theme.iconColorFocused : theme.iconColor}
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 };
 
-export default RootLayout;
+export default TabsLayout;
 
 const styles = StyleSheet.create({});

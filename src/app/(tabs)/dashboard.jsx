@@ -1,16 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
+import ThemedView from "../../components/themed-view";
+import ThemedText from "../../components/themed-text";
+import Spacer from "../../components/spacer";
 
 const Dashboard = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Dashboard Page</Text>
-
-      <Link href="/">Back Home</Link>
-      <Link href="/wallet">view wallet</Link>
-      <Link href="/bookings">view bookings</Link>
-    </View>
+    <ThemedView style={styles.container}>
+      <ThemedText title={true} style={styles.title}>
+        Hi, Jaxon 👋
+      </ThemedText>
+    </ThemedView>
   );
 };
 
@@ -19,7 +20,6 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
