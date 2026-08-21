@@ -1,7 +1,7 @@
 import { StyleSheet, useColorScheme } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import { Colors } from "../../constants/colors";
+import { Colors } from "@constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 const TabsLayout = () => {

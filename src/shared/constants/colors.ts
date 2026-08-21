@@ -1,4 +1,27 @@
-export const Colors = {
+export interface Colors {
+  primary: string;
+  warning: string;
+  dark: {
+    text: string;
+    title: string;
+    background: string;
+    navBackground: string;
+    iconColor: string;
+    iconColorFocused: string;
+    uiBackground: string;
+  };
+  light: {
+    text: string;
+    title: string;
+    background: string;
+    navBackground: string;
+    iconColor: string;
+    iconColorFocused: string;
+    uiBackground: string;
+  };
+}
+
+export const Colors: Colors = {
   primary: "#8B5CF6", // Vibrant purple accent used on buttons, icons, and hero headers
   warning: "#F59E0B", // Standard warning amber / badge tint
 

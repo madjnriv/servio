@@ -1,41 +1,33 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
-import ThemedView from "../components/themed-view";
-import ThemedLogo from "../components/themed-logo";
-import Spacer from "../components/spacer";
-import ThemedText from "../components/themed-text";
 
 const Home = () => {
   return (
-    <ThemedView styles={styles.container}>
-      <ThemedLogo />
-      <Spacer height={20} />
-      <ThemedText style={styles.title} title={true}>
+    <View className="bg-pink-500">
+      <Text style={styles.title}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
         repudiandae.
-      </ThemedText>
-      <Spacer />
-      <ThemedText>
+      </Text>
+      <Text className="text-green-500">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus commodi
         doloribus temporibus nemo esse dolores tenetur quod non distinctio, unde
         modi accusantium, vero ab perspiciatis reiciendis. Aliquam at quidem
         labore cumque eveniet doloribus dignissimos error, fugiat facilis porro!
         Nobis quibusdam fugit ipsam sequi quasi! Odit, itaque. Itaque
         consequuntur iure esse.
-      </ThemedText>
+      </Text>
 
-      <Spacer />
       <Link href="/login">
-        <ThemedText>Login</ThemedText>
+        <Text>Login</Text>
       </Link>
       <Link href="/register">
-        <ThemedText>Register</ThemedText>
+        <Text>Register</Text>
       </Link>
       <Link href="/dashboard">
-        <ThemedText>Dashboard</ThemedText>
+        <Text>Dashboard</Text>
       </Link>
-    </ThemedView>
+    </View>
   );
 };
 

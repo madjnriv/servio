@@ -11,9 +11,11 @@
       "typedRoutes": true
     },
     "ios": {
+      "bundleIdentifier": "com.servio.app",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.servio.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
