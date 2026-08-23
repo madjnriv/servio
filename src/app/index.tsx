@@ -9,7 +9,7 @@ const Home = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
         repudiandae.
       </Text>
-      <Text>
+      <Text className="bg-pink-500 text-2xl px-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus commodi
         doloribus temporibus nemo esse dolores tenetur quod non distinctio, unde
         modi accusantium, vero ab perspiciatis reiciendis. Aliquam at quidem
@@ -18,7 +18,10 @@ const Home = () => {
         consequuntur iure esse.
       </Text>
 
-      <Link href="/login">
+      <Link
+        href="/login"
+        className="mt-5 bg-purple-500 mx-auto px-5 py-1 rounded-xl text-purple-100"
+      >
         <Text>Login</Text>
       </Link>
       <Link href="/register">
