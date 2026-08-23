@@ -8,7 +8,6 @@ import {
 } from "react-native";
 
 import { Link } from "expo-router";
-import { Colors } from "@constants/colors";
 
 const Login = () => {
   const handleSubmit = () => {
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   btn: {
-    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 6,
