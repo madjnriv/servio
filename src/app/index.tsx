@@ -4,12 +4,12 @@ import { Link } from "expo-router";
 
 const Home = () => {
   return (
-    <View>
+    <View className="bg-primary">
       <Text style={styles.title}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
         repudiandae.
       </Text>
-      <Text className="bg-pink-500 text-2xl px-2">
+      <Text className="bg-primary text-2xl px-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus commodi
         doloribus temporibus nemo esse dolores tenetur quod non distinctio, unde
         modi accusantium, vero ab perspiciatis reiciendis. Aliquam at quidem
