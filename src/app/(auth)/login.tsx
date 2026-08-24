@@ -1,57 +1,42 @@
-import {
-  Button,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-
-import { Link } from "expo-router";
+import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { LoginForm } from "@/features/auth";
+import { useRouter } from "expo-router";
 
 const Login = () => {
-  const handleSubmit = () => {
-    console.log("Login form submitted");
+  const router = useRouter();
+  const handleSubmit = ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    console.log("Login form submitted", {
+      email,
+      password,
+    });
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login to your account</Text>
-
-      <TextInput placeholder="johndoe@example.com" />
-
-      <Button onPress={handleSubmit} title="Login" />
-
-      <Link href={"/register"}>
-        <Text style={styles.link}>Don't have an account? Sign up</Text>
-      </Link>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View className="h-full justify-center bg-background gap-y-2">
+        <View>
+          <Text className="mx-auto text-xl w-[80%] text-center text-secondary-foreground font-semibold">
+            Welcome back! Please enter your email and password to sign in.
+          </Text>
+        </View>
+        <LoginForm handleSubmit={handleSubmit} className="mt-5" />
+        <View className="flex-row gap-2 items-center justify-center mt-4">
+          <Text>Don't have an account?</Text>
+          <Text
+            className="text-primary"
+            onPress={() => router.push("/register")}
+          >
+            Sign Up
+          </Text>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  link: {
-    fontSize: 16,
-    color: "blue",
-    textAlign: "center",
-  },
-  btn: {
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 6,
-    marginTop: 20,
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-});

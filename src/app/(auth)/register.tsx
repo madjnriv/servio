@@ -1,40 +1,35 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import React from "react";
-
-import { Link } from "expo-router";
+import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { RegisterForm } from "@/features/auth";
 
 const Register = () => {
-  const handleSubmit = () => {
-    console.log("Register form submitted");
+  const handleSubmit = ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    console.log("Register form submitted", {
+      email,
+      password,
+    });
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create a new account</Text>
-
-      <Button onPress={handleSubmit} title="Register" />
-
-      <Link href={"/login"}>
-        <Text style={styles.link}>Already have an account? Log in</Text>
-      </Link>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View className="h-full justify-center bg-background gap-y-2">
+        <View>
+          <Text className="mx-auto text-xl w-[80%] text-center text-secondary-foreground font-semibold">
+            Please enter your email and password to create an account.
+          </Text>
+        </View>
+        <RegisterForm handleSubmit={handleSubmit} className="mt-5" />
+        <View className="flex-row gap-2 items-center justify-center mt-4">
+          <Text>Already have an account?</Text>
+          <Text className="text-primary">Sign In</Text>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default Register;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  link: {
-    fontSize: 16,
-    color: "blue",
-    textAlign: "center",
-  },
-});
