@@ -1,9 +1,11 @@
 import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { LoginForm } from "@/features/auth";
 import { useRouter } from "expo-router";
+import { useAuthContext } from "@/shared/hooks/use-auth";
 
 const Login = () => {
   const router = useRouter();
+  const { user } = useAuthContext();
   const handleSubmit = ({
     email,
     password,
@@ -14,6 +16,9 @@ const Login = () => {
     console.log("Login form submitted", {
       email,
       password,
+    });
+    console.log("User info", {
+      user,
     });
   };
   return (

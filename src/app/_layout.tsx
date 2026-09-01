@@ -3,10 +3,11 @@ import React from "react";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "./global.css";
+import { AuthProvider } from "@/shared/contexts/auth-context";
 
 const RootLayout = () => {
   return (
-    <>
+    <AuthProvider>
       <StatusBar style="auto" />
       <Stack
         screenOptions={{
@@ -14,7 +15,7 @@ const RootLayout = () => {
           animation: "none",
         }}
       />
-    </>
+    </AuthProvider>
   );
 };
 
