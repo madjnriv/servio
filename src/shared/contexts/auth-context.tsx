@@ -12,7 +12,7 @@ interface AuthContextValue {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  setAuth: (user: User, token: string) => void;
+  setAuth: (user: User) => void;
   clearAuth: () => void;
 }
 
@@ -30,9 +30,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const setAuth = useCallback((user: User, token: string) => {
+  const setAuth = useCallback((user: User) => {
     setUser(user);
-    setToken(token);
+    // setToken(token);
     setIsAuthenticated(true);
     setIsLoading(false);
   }, []);

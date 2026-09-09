@@ -4,25 +4,30 @@ import { Input } from "@/shared/components/input";
 import { Button } from "@/shared/components/button";
 import { Label } from "@/shared/components/label";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
+import { RegisterDto } from "../schemas/register.schema";
+import { authService } from "../services/auth.service";
+import { useAuthContext } from "@/shared/hooks/use-auth";
 
 interface RegisterFormProps {
-  handleSubmit: ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => void;
   className?: string;
 }
-export const RegisterForm = ({
-  handleSubmit,
-  className,
-}: RegisterFormProps) => {
+export const RegisterForm = ({ className }: RegisterFormProps) => {
   const { theme } = UseThemeColor();
   const [email, setEmail] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { setAuth } = useAuthContext();
+
+  const handleSubmit = async (data: RegisterDto) => {
+    try {
+      console.log("Register form submitted");
+      const { newUserEmail, name, id } = await authService.register(data);
+
+      setAuth({ email: newUserEmail, id, name });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View className={`${className} gap-3 px-5`}>
@@ -67,7 +72,7 @@ export const RegisterForm = ({
       </View>
 
       <Button
-        onPress={() => handleSubmit({ email, password })}
+        onPress={() => handleSubmit({ email, password, name: fullName })}
         className="mt-3"
       >
         Register
