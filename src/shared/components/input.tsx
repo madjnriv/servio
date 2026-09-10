@@ -52,7 +52,7 @@ export const Input = ({
   const { theme } = UseThemeColor();
   return (
     <TextInput
-      className={`${className} bg-input text-foreground p-3 rounded-full h-12`}
+      className={` bg-input text-foreground p-3 rounded-full h-12 ${className}`}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor ?? theme.background}
       style={[style, minHeight !== undefined ? { minHeight } : undefined]}

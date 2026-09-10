@@ -1,31 +1,53 @@
 import { View, Text } from "react-native";
-import React from "react";
 import { Input } from "@/shared/components/input";
 import { Button } from "@/shared/components/button";
 import { Label } from "@/shared/components/label";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
-import { RegisterDto } from "../schemas/register.schema";
+import { RegisterDto, registerDtoSchema } from "../schemas/register.schema";
 import { authService } from "../services/auth.service";
 import { useAuthContext } from "@/shared/hooks/use-auth";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-native-sonner";
 
 interface RegisterFormProps {
   className?: string;
 }
 export const RegisterForm = ({ className }: RegisterFormProps) => {
   const { theme } = UseThemeColor();
-  const [email, setEmail] = React.useState("");
-  const [fullName, setFullName] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const { setAuth } = useAuthContext();
 
-  const handleSubmit = async (data: RegisterDto) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<RegisterDto>({
+    resolver: zodResolver(registerDtoSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    mode: "onTouched",
+  });
+
+  const onSubmit = async (data: RegisterDto) => {
     try {
       console.log("Register form submitted");
       const { newUserEmail, name, id } = await authService.register(data);
+      reset({
+        name: "",
+        email: "",
+        password: "",
+      });
 
       setAuth({ email: newUserEmail, id, name });
     } catch (error) {
       console.log(error);
+      const message =
+        error instanceof Error ? error.message : "Something went wrong";
+      toast.error(message);
     }
   };
 
@@ -33,49 +55,85 @@ export const RegisterForm = ({ className }: RegisterFormProps) => {
     <View className={`${className} gap-3 px-5`}>
       <View className=" gap-0.5">
         <Label>Name</Label>
-        <Input
-          placeholder="John Doe"
-          onChangeText={setFullName}
-          value={fullName}
-          placeholderTextColor={theme.input}
-          className="w-full bg-input/20 border border-border/50"
-          returnKeyType="next"
-          autoCapitalize="words"
-          autoComplete="name"
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="John Doe"
+              onChangeText={onChange}
+              value={value}
+              placeholderTextColor={theme.input}
+              className="w-full bg-input/20 border border-border/50"
+              returnKeyType="next"
+              autoCapitalize="words"
+              autoComplete="name"
+            />
+          )}
         />
+        {errors.name && (
+          <Text className="text-destructive text-sm">
+            {errors.name.message}
+          </Text>
+        )}
       </View>
+
       <View className=" gap-0.5">
         <Label>Email</Label>
-        <Input
-          placeholder="Johndoe@example.com"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          value={email}
-          placeholderTextColor={theme.input}
-          className="w-full bg-input/20 border border-border/50"
-          returnKeyType="next"
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Johndoe@example.com"
+              keyboardType="email-address"
+              onChangeText={onChange}
+              value={value}
+              placeholderTextColor={theme.input}
+              className="w-full bg-input/20 border border-border/50"
+              returnKeyType="next"
+            />
+          )}
         />
+        {errors.email && (
+          <Text className="text-destructive text-sm">
+            {errors.email.message}
+          </Text>
+        )}
       </View>
+
       <View className=" gap-0.5">
         <Label>Password</Label>
-        <Input
-          placeholder="*** *** ***"
-          onChangeText={setPassword}
-          value={password}
-          secureTextEntry={true}
-          textContentType="newPassword"
-          autoCapitalize="none"
-          autoComplete="password"
-          placeholderTextColor={theme.input}
-          className="w-full bg-input/20 border border-border/50"
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="*** *** ***"
+              onChangeText={onChange}
+              value={value}
+              secureTextEntry={true}
+              textContentType="newPassword"
+              autoCapitalize="none"
+              autoComplete="password"
+              placeholderTextColor={theme.input}
+              className="w-full bg-input/20 border border-border/50"
+            />
+          )}
         />
+        {errors.password && (
+          <Text className="text-destructive text-sm">
+            {errors.password.message}
+          </Text>
+        )}
       </View>
 
       <Button
-        onPress={() => handleSubmit({ email, password, name: fullName })}
+        onPress={handleSubmit(onSubmit)}
         className="mt-3"
+        disabled={isSubmitting}
       >
-        Register
+        {isSubmitting ? "Loading..." : "Register"}
       </Button>
     </View>
   );

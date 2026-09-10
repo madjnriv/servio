@@ -8,7 +8,7 @@ interface LabelProps {
 export const Label = ({ className, children }: LabelProps) => {
   return (
     <Text
-      className={`${className} text-sm text-secondary-foreground font-semibold`}
+      className={` text-sm text-secondary-foreground font-semibold ${className}`}
     >
       {children}
     </Text>
