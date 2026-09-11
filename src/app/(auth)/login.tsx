@@ -22,6 +22,7 @@ const Login = () => {
           >
             Sign Up
           </Text>
+          <Text onPress={() => router.push("/profile")}>see Profile</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

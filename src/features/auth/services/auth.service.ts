@@ -23,5 +23,9 @@ export const authService = {
     const { name, email, $id } = userData;
     return { name, userEmail: email, id: $id };
   },
-  logout: async () => {},
+  logout: async () => {
+    await account.deleteSession({
+      sessionId: "current",
+    });
+  },
 };
