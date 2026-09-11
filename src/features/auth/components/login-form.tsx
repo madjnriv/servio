@@ -1,5 +1,4 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
 import { Input } from "@/shared/components/input";
 import { Button } from "@/shared/components/button";
 import { Label } from "@/shared/components/label";
@@ -50,7 +49,9 @@ export const LoginForm = ({ className }: LoginFormProps) => {
       console.log(error);
       const message =
         error instanceof Error ? error.message : "Something went wrong";
-      toast.error(message);
+      toast.error(message, {
+        toasterId: "login-error",
+      });
     }
   };
 
