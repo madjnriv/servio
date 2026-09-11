@@ -4,7 +4,7 @@ import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { useAuthContext } from "@/shared/hooks/use-auth";
 import { LoadingSpinner } from "@/shared/components/loading-spinner";
 
-const TabsLayout = () => {
+const ScreensLayout = () => {
   const { theme } = UseThemeColor();
   const { isLoading, isAuthenticated } = useAuthContext();
   const router = useRouter();
@@ -82,4 +82,4 @@ const TabsLayout = () => {
   );
 };
 
-export default TabsLayout;
+export default ScreensLayout;
