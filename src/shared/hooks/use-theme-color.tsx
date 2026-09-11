@@ -3,7 +3,8 @@ import { colors } from "../constants/colors";
 
 export const UseThemeColor = () => {
   const colorScheme = useColorScheme();
-  const theme = colors[colorScheme ?? "light"];
+
+  const theme = colorScheme === "dark" ? colors.dark : colors.light;
 
   return { theme };
 };
