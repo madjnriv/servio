@@ -1,13 +1,13 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View } from "react-native";
 import { useAuthContext } from "@/shared/hooks/use-auth";
 import { Button } from "@/shared/components/button";
 import { authService } from "@/features/auth";
 import { toast } from "react-native-sonner";
 import { getErrorMessage } from "@/shared/lib/get-error-msg";
+import { ProfileInfoCard } from "@/features/profile";
 
 const Profile = () => {
-  const { clearAuth } = useAuthContext();
+  const { clearAuth, user } = useAuthContext();
 
   const handleLogout = async () => {
     try {
@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <View>
-      <Text>Profile</Text>
+      <ProfileInfoCard user={user} />
 
       <Button onPress={handleLogout}>Log out</Button>
     </View>

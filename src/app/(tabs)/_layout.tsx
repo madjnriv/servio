@@ -1,9 +1,18 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
+import { useAuthContext } from "@/shared/hooks/use-auth";
+import { LoadingSpinner } from "@/shared/components/loading-spinner";
 
 const TabsLayout = () => {
   const { theme } = UseThemeColor();
+  const { isLoading, isAuthenticated } = useAuthContext();
+  const router = useRouter();
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (!isAuthenticated) router.replace("/");
   return (
     <Tabs
       screenOptions={{

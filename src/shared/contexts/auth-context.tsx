@@ -2,10 +2,14 @@ import {
   createContext,
   ReactNode,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
 import { User } from "../types/user.types";
+import { getErrorMessage } from "../lib/get-error-msg";
+import { toast } from "react-native-sonner";
+import { account } from "../lib/appwrite";
 
 interface AuthContextValue {
   user: User | null;
@@ -42,6 +46,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(null);
     setIsAuthenticated(false);
     setIsLoading(false);
+  }, []);
+
+  const getInitialAuthState = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const userData = await account.get();
+      const { name, email, $id } = userData;
+      setUser({ name, email, id: $id });
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.log(error);
+
+      const message = getErrorMessage(error);
+      toast.error(message, { toasterId: "auth-state-error" });
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getInitialAuthState();
   }, []);
 
   const value = useMemo(
