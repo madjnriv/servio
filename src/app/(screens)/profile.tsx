@@ -22,7 +22,7 @@ const Profile = () => {
   };
 
   return (
-    <View>
+    <View className="mt-50">
       <ProfileInfoCard user={user} />
 
       <Button onPress={handleLogout}>Log out</Button>

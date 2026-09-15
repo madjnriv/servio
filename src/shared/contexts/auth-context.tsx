@@ -10,6 +10,8 @@ import { User } from "../types/user.types";
 import { getErrorMessage } from "../lib/get-error-msg";
 import { toast } from "react-native-sonner";
 import { account } from "../lib/appwrite";
+import { LoadingSpinner } from "../components/loading-spinner";
+import { useRouter } from "expo-router";
 
 interface AuthContextValue {
   user: User | null;
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   const setAuth = useCallback((user: User) => {
     setUser(user);
@@ -55,6 +58,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { name, email, $id } = userData;
       setUser({ name, email, id: $id });
       setIsAuthenticated(true);
+      router.replace("/dashboard");
     } catch (error) {
       console.log(error);
 
@@ -75,5 +79,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     () => ({ isAuthenticated, isLoading, user, token, setAuth, clearAuth }),
     [isAuthenticated, isLoading, user, token, setAuth, clearAuth],
   );
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return <AuthContext value={value}>{children}</AuthContext>;
 };
