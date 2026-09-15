@@ -33,9 +33,6 @@
       }
     },
     "owner": "ivs-team",
-    "plugins": [
-      "expo-router",
-      "expo-status-bar"
-    ]
+    "plugins": ["expo-router", "expo-status-bar"]
   }
 }

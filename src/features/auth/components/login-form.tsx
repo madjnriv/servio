@@ -114,7 +114,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
         className="mt-3"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Loading..." : "Login"}
+        {isSubmitting ? <Text>Loading...</Text> : "Login"}
       </Button>
     </View>
   );

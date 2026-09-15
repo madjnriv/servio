@@ -1,8 +1,8 @@
 import { EvilIcons } from "@expo/vector-icons";
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import { UseThemeColor } from "../hooks/use-theme-color";
 
-export const LoadingSpinner = () => {
+export const ScreenLoader = () => {
   const { theme } = UseThemeColor();
   //   const spinValue = useRef(new Animated.Value(0)).current;
 
@@ -26,13 +26,15 @@ export const LoadingSpinner = () => {
     <View className="h-full flex justify-center items-center">
       <View>
         {/* <Animated.View style={{ transform: [{ rotate: spin }] }}> */}
-        <EvilIcons
+        {/* <EvilIcons
           name="spinner-3"
           size={50}
           color={theme.primary}
           className="animate-spin"
-        />
+        /> */}
         {/* </Animated.View> */}
+
+        <ActivityIndicator size="large" color={theme.primary} />
 
         <Text className="mt-2 text-lg text-primary animate-pulse text-center">
           servio

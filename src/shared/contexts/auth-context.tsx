@@ -8,9 +8,8 @@ import {
 } from "react";
 import { User } from "../types/user.types";
 import { getErrorMessage } from "../lib/get-error-msg";
-import { toast } from "react-native-sonner";
 import { account } from "../lib/appwrite";
-import { LoadingSpinner } from "../components/loading-spinner";
+import { ScreenLoader } from "../components/screen-loader";
 import { useRouter } from "expo-router";
 
 interface AuthContextValue {
@@ -63,7 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       console.log(error);
 
       const message = getErrorMessage(error);
-      toast.error(message, { toasterId: "auth-state-error" });
+      // toast.error(message, { toasterId: "auth-state-error" });
       setUser(null);
       setIsAuthenticated(false);
     } finally {
@@ -81,7 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <ScreenLoader />;
   }
   return <AuthContext value={value}>{children}</AuthContext>;
 };
