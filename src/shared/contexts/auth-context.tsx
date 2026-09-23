@@ -11,6 +11,7 @@ import { getErrorMessage } from "../lib/get-error-msg";
 import { account } from "../lib/appwrite";
 import { ScreenLoader } from "../components/screen-loader";
 import { useRouter } from "expo-router";
+import { ProviderProfile } from "../types/provider-profile";
 
 interface AuthContextValue {
   user: User | null;
@@ -19,6 +20,8 @@ interface AuthContextValue {
   isLoading: boolean;
   setAuth: (user: User) => void;
   clearAuth: () => void;
+  providerProfile: ProviderProfile | null;
+  setProfiles: (profile: ProviderProfile) => void;
 }
 
 interface AuthProviderProps {
@@ -31,6 +34,8 @@ export const AuthContext = createContext<AuthContextValue | undefined>(
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [providerProfile, setProviderProfile] =
+    useState<ProviderProfile | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -48,6 +53,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(null);
     setIsAuthenticated(false);
     setIsLoading(false);
+  }, []);
+
+  const setProfiles = useCallback((profile: ProviderProfile) => {
+    setProviderProfile(profile);
   }, []);
 
   const getInitialAuthState = useCallback(async () => {
@@ -75,8 +84,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const value = useMemo(
-    () => ({ isAuthenticated, isLoading, user, token, setAuth, clearAuth }),
-    [isAuthenticated, isLoading, user, token, setAuth, clearAuth],
+    () => ({
+      isAuthenticated,
+      isLoading,
+      user,
+      token,
+      setAuth,
+      clearAuth,
+      providerProfile,
+      setProfiles,
+    }),
+    [
+      isAuthenticated,
+      isLoading,
+      user,
+      token,
+      setAuth,
+      clearAuth,
+      providerProfile,
+      setProfiles,
+    ],
   );
 
   if (isLoading) {
