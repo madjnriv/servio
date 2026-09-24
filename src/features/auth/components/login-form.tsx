@@ -123,7 +123,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 
       <Button
         onPress={handleSubmit(onSubmit)}
-        className="mt-3"
+        className="mt-3 w-full h-12"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Text>Loading...</Text> : "Login"}
