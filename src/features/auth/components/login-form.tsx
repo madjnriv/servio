@@ -10,6 +10,8 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-native-sonner";
 import { providerProfileService } from "../services/provider-profile.service";
+import { AppwriteException } from "react-native-appwrite";
+import { useRouter } from "expo-router";
 
 interface LoginFormProps {
   className?: string;
@@ -17,6 +19,7 @@ interface LoginFormProps {
 export const LoginForm = ({ className }: LoginFormProps) => {
   const { theme } = UseThemeColor();
   const { setAuth, setProfiles } = useAuthContext();
+  const router = useRouter();
 
   const {
     control,
@@ -45,12 +48,17 @@ export const LoginForm = ({ className }: LoginFormProps) => {
         password: "",
       });
       const providerProfile = await providerProfileService.getProfile();
-
       setAuth({ email: userEmail, id, name });
-
       if (providerProfile) setProfiles(providerProfile);
+      router.replace("/dashboard");
     } catch (error) {
       console.log(error);
+      if (
+        error instanceof AppwriteException &&
+        (error.code === 401 || error.code === 403)
+      ) {
+        return;
+      }
       const message =
         error instanceof Error ? error.message : "Something went wrong";
       toast.error(message, {
