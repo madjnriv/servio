@@ -5,3 +5,4 @@ export type {
   Service,
   ServiceCategory,
 } from "./types/services.types";
+export { Header } from "./components/header";

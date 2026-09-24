@@ -1,26 +1,19 @@
-import { ServicesProvider } from "@/features/dashboard";
-import { StyleSheet, View, Text } from "react-native";
+import { Header, ServicesProvider } from "@/features/dashboard";
+import { useAuthContext } from "@/shared/hooks/use-auth";
+import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
 
 const Dashboard = () => {
+  const { providerProfile } = useAuthContext();
   return (
-    <ServicesProvider>
-      <View style={styles.container}>
-        <Text style={styles.title}>Hi, Jaxon 👋</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View className="flex-1 bg-foreground">
+        <Header
+          name="Jaxon"
+          isProvider={Boolean(providerProfile?.businessName)}
+        />
       </View>
-    </ServicesProvider>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default Dashboard;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-});

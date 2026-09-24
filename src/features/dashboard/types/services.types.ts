@@ -1,8 +1,9 @@
 import { Models } from "react-native-appwrite";
 
-export type PricingUnit = "HOUR" | "SERVICE" | "VISIT" | "DAY";
+export type PricingUnit = "HOUR" | "MONTH" | "DAY" | "YEAR";
 
 export interface Service {
+  id: string;
   name: string;
   slug: string;
   excerpt: string;
@@ -10,12 +11,12 @@ export interface Service {
   imageUrl?: string[];
   pricingUnit: PricingUnit;
   isActive?: boolean;
-  sortOrder?: number;
 
   providerId?: string;
   categoryId?: string;
 
   price: number;
+  createdAt: string;
 }
 
 export interface ServiceCategory {
@@ -26,15 +27,7 @@ export interface ServiceCategory {
   isActive?: boolean;
 }
 
-export interface RawServiceCategory extends Models.DefaultDocument {
-  name: string;
-  slug: string;
-  description?: string;
-  sort_order?: number;
-  is_active?: boolean;
-}
-
-export interface RawService extends Models.Document {
+export interface RawService extends Models.DefaultRow {
   name: string;
   slug: string;
   excerpt: string;
@@ -44,10 +37,16 @@ export interface RawService extends Models.Document {
   pricing_unit: PricingUnit;
 
   is_active?: boolean;
-  sort_order?: number;
 
-  provider_id?: string;
-  category_id?: string;
+  provider_id: string;
+  category_id: string;
 
   price: number;
+}
+export interface RawServiceCategory extends Models.DefaultRow {
+  name: string;
+  slug: string;
+  description?: string;
+  sort_order?: number;
+  is_active?: boolean;
 }
