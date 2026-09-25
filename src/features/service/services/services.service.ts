@@ -2,7 +2,10 @@ import { DATABASE_ID, COLLECTION_ID } from "@/shared/constants/database";
 import { CreateServiceDto } from "../schemas/create-service.schema";
 import { tablesDB } from "@/shared/lib/appwrite";
 import { ID, Query } from "react-native-appwrite";
-import { RawService, RawServiceCategory } from "../types/services.types";
+import {
+  RawService,
+  RawServiceCategory,
+} from "../../../shared/types/services.types";
 import { toast } from "react-native-sonner";
 import { createServiceSlug } from "../utils/create-service-slug";
 
