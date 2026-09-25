@@ -65,7 +65,7 @@ export const Header = ({ name, location, isProvider }: HeaderProps) => {
 
         {isProvider && (
           <Button
-            className="bg-primary-foreground/10 w-12 h-12 p-0 flex-row items-center justify-center rounded-full border border-border/50"
+            className="bg-primary-foreground/10 w-12 h-12 flex-row items-center justify-center rounded-full border border-border/50"
             icon={true}
             onPress={() => router.push("/create")}
           >

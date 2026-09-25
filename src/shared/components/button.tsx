@@ -22,7 +22,7 @@ export const Button = ({
       onPress={onPress}
       disabled={disabled}
       style={[style]}
-      className={`flex-row bg-primary items-center justify-center p-3 rounded-full ${className} ${disabled && "opacity-50"}`}
+      className={`flex-row bg-primary items-center justify-center rounded-full ${className} ${disabled && "opacity-50"}`}
     >
       {icon ? (
         <>{children}</>

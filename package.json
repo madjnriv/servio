@@ -13,6 +13,7 @@
     "expo-linking": "~57.0.10",
     "expo-router": "~57.0.21",
     "expo-status-bar": "~57.0.1",
+    "lucide-react-native": "^1.48.0",
     "metro": "^0.84.4",
     "metro-config": "^0.84.5",
     "nativewind": "^4.2.6",
