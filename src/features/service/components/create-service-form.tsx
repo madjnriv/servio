@@ -11,6 +11,7 @@ import { Label } from "@/shared/components/label";
 import { Input } from "@/shared/components/input";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { Button } from "@/shared/components/button";
+import { ImageInput } from "./image-input";
 
 export const CreateServiceForm = () => {
   const { theme } = UseThemeColor();
@@ -57,14 +58,17 @@ export const CreateServiceForm = () => {
   };
   return (
     <View>
-      <View className=" gap-0.5">
-        <Label>Name</Label>
+      <ImageInput />
+      <View className="mt-5 gap-0.5">
+        <Label>
+          Name <Text className="text-destructive">*</Text>
+        </Label>
         <Controller
           control={control}
           name="name"
           render={({ field: { onChange, value } }) => (
             <Input
-              placeholder="John Doe"
+              placeholder="Home Cleaning"
               onChangeText={onChange}
               value={value}
               placeholderTextColor={theme.input}
@@ -82,14 +86,14 @@ export const CreateServiceForm = () => {
         )}
       </View>
 
-      <View className=" gap-0.5">
-        <Label>Category</Label>
+      <View className="mt-2 gap-0.5">
+        <Label>Excerpt</Label>
         <Controller
           control={control}
-          name="category"
+          name="excerpt"
           render={({ field: { onChange, value } }) => (
             <Input
-              placeholder="Johndoe@example.com"
+              placeholder="A short description"
               keyboardType="email-address"
               onChangeText={onChange}
               value={value}
