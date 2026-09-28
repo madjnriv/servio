@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import {
   CreateServiceDto,
   createServiceDtoSchema,
@@ -28,7 +28,7 @@ export const CreateServiceForm = () => {
       category: "",
       description: "",
       excerpt: "",
-      price: 0.0,
+      price: "0.0",
       pricingUnit: "HOUR",
     },
     mode: "onTouched",
@@ -46,7 +46,7 @@ export const CreateServiceForm = () => {
         category: "",
         description: "",
         excerpt: "",
-        price: 0.0,
+        price: "0.0",
         pricingUnit: "HOUR",
       });
     } catch (error) {
@@ -87,14 +87,15 @@ export const CreateServiceForm = () => {
       </View>
 
       <View className="mt-2 gap-0.5">
-        <Label>Excerpt</Label>
+        <Label>Category</Label>
         <Controller
           control={control}
-          name="excerpt"
+          name="category"
           render={({ field: { onChange, value } }) => (
             <Input
-              placeholder="A short description"
-              keyboardType="email-address"
+              placeholder=""
+              multiline={true}
+              numberOfLines={3}
               onChangeText={onChange}
               value={value}
               placeholderTextColor={theme.input}
@@ -108,6 +109,103 @@ export const CreateServiceForm = () => {
             {errors.category.message}
           </Text>
         )}
+      </View>
+      <View className="mt-2 gap-0.5">
+        <Label>Excerpt</Label>
+        <Controller
+          control={control}
+          name="excerpt"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="A short description"
+              multiline={true}
+              numberOfLines={3}
+              onChangeText={onChange}
+              value={value}
+              placeholderTextColor={theme.input}
+              className="w-full bg-input/20 border border-border/50"
+              returnKeyType="next"
+            />
+          )}
+        />
+        {errors.excerpt && (
+          <Text className="text-destructive text-sm">
+            {errors.excerpt.message}
+          </Text>
+        )}
+      </View>
+      <View className="mt-2 gap-0.5">
+        <Label>Description</Label>
+        <Controller
+          control={control}
+          name="description"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Describe your service in detail"
+              multiline={true}
+              numberOfLines={3}
+              onChangeText={onChange}
+              value={value}
+              placeholderTextColor={theme.input}
+              className="w-full h-24 rounded-lg bg-input/20 border border-border/50"
+              returnKeyType="next"
+            />
+          )}
+        />
+        {errors.description && (
+          <Text className="text-destructive text-sm">
+            {errors.description.message}
+          </Text>
+        )}
+      </View>
+      <View className="mt-2 gap-2 flex-row items-center justify-between">
+        <View className="mt-2 gap-0.5 w-[65%]">
+          <Label>Pricing Unit</Label>
+          <Controller
+            control={control}
+            name="pricingUnit"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Describe your service in detail"
+                multiline={true}
+                numberOfLines={3}
+                onChangeText={onChange}
+                value={value}
+                placeholderTextColor={theme.input}
+                className="w-full bg-input/20 border border-border/50"
+                returnKeyType="next"
+              />
+            )}
+          />
+          {errors.pricingUnit && (
+            <Text className="text-destructive text-sm">
+              {errors.pricingUnit.message}
+            </Text>
+          )}
+        </View>
+        <View className="mt-2 gap-0.5 w-[30%]">
+          <Label>Price</Label>
+          <Controller
+            control={control}
+            name="price"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Describe your service in detail"
+                keyboardType="numeric"
+                onChangeText={onChange}
+                value={value}
+                placeholderTextColor={theme.input}
+                className="w-full bg-input/20 border border-border/50"
+                returnKeyType="next"
+              />
+            )}
+          />
+          {errors.price && (
+            <Text className="text-destructive text-sm">
+              {errors.price.message}
+            </Text>
+          )}
+        </View>
       </View>
 
       <Button
