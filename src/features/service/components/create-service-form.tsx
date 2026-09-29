@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 import {
   CreateServiceDto,
   createServiceDtoSchema,
@@ -12,9 +12,13 @@ import { Input } from "@/shared/components/input";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { Button } from "@/shared/components/button";
 import { ImageInput } from "./image-input";
+import { useAuthContext } from "@/shared/hooks/use-auth";
+import { useRouter } from "expo-router";
 
 export const CreateServiceForm = () => {
   const { theme } = UseThemeColor();
+  const { providerProfile } = useAuthContext();
+  const router = useRouter();
 
   const {
     control,
@@ -39,7 +43,7 @@ export const CreateServiceForm = () => {
       console.log("Register form submitted");
       const res = await servicesService.create({
         data,
-        providerID: "",
+        providerID: providerProfile?.id,
       });
       reset({
         name: "",
@@ -49,6 +53,11 @@ export const CreateServiceForm = () => {
         price: "0.0",
         pricingUnit: "HOUR",
       });
+
+      if (res) {
+        toast.success("Service created successfully");
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.log(error);
       const message =

@@ -8,6 +8,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -20,61 +22,65 @@ const Create = () => {
           Keyboard.dismiss();
           return false;
         }}
-        className="p-3"
+        className="p-3 pb-10"
       >
         <Button className="bg-transparent self-start" icon={true}>
           <Ionicons name="chevron-back" color={theme.accent} size={25} />
           <Text className="text-accent text-lg">Back</Text>
         </Button>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View className="mt-5">
-            <View className="flex-row justify-between">
-              <Text className="text-3xl font-semibold w-48 text-foreground">
-                Create a{" "}
-                <Ionicons
-                  name="albums-outline"
-                  size={25}
-                  color={theme.mutedForeground}
-                />{" "}
-                New <Text className="text-muted-foreground">Service</Text>
-              </Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View className="mt-5">
+              <View className="flex-row justify-between">
+                <Text className="text-3xl font-semibold w-48 text-foreground">
+                  Create a{" "}
+                  <Ionicons
+                    name="albums-outline"
+                    size={25}
+                    color={theme.mutedForeground}
+                  />{" "}
+                  New <Text className="text-muted-foreground">Service</Text>
+                </Text>
 
-              <View className="relative flex-row gap-1">
-                <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl mt-7">
-                  <Ionicons
-                    size={20}
-                    name="briefcase-outline"
-                    color={theme.mutedForeground}
-                  />
-                </View>
-                <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl">
-                  <Ionicons
-                    size={20}
-                    name="call-outline"
-                    color={theme.mutedForeground}
-                  />
-                </View>
-                <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl mt-5">
-                  <Ionicons
-                    size={20}
-                    name="calendar"
-                    color={theme.mutedForeground}
-                  />
+                <View className="relative flex-row gap-1">
+                  <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl mt-7">
+                    <Ionicons
+                      size={20}
+                      name="briefcase-outline"
+                      color={theme.mutedForeground}
+                    />
+                  </View>
+                  <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl">
+                    <Ionicons
+                      size={20}
+                      name="call-outline"
+                      color={theme.mutedForeground}
+                    />
+                  </View>
+                  <View className="border border-border bg-muted w-11 h-11 items-center justify-center rounded-xl mt-5">
+                    <Ionicons
+                      size={20}
+                      name="calendar"
+                      color={theme.mutedForeground}
+                    />
+                  </View>
                 </View>
               </View>
+
+              <Text className="text-muted-foreground mt-3">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, voluptatum.
+              </Text>
             </View>
 
-            <Text className="text-muted-foreground mt-3">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              voluptatum.
-            </Text>
-          </View>
-
-          {/* FORM */}
-          <View className="mt-9">
-            <CreateServiceForm />
-          </View>
-        </ScrollView>
+            {/* FORM */}
+            <View className="mt-9">
+              <CreateServiceForm />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
