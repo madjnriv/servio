@@ -15,7 +15,7 @@ export interface ProviderProfile {
   isVerified?: boolean;
 }
 
-export interface RawProviderProfile extends Models.Document {
+export interface RawProviderProfile extends Models.DefaultRow {
   user_profile_id?: string;
 
   business_name: string;
