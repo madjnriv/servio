@@ -10,6 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-native-sonner";
 import { userProfileService } from "../services/user-profile.service";
+import { useRouter } from "expo-router";
 
 interface RegisterFormProps {
   className?: string;
@@ -17,6 +18,7 @@ interface RegisterFormProps {
 export const RegisterForm = ({ className }: RegisterFormProps) => {
   const { theme } = UseThemeColor();
   const { setAuth, setProfiles } = useAuthContext();
+  const router = useRouter();
 
   const {
     control,
@@ -47,6 +49,7 @@ export const RegisterForm = ({ className }: RegisterFormProps) => {
 
       setAuth({ email: newUserEmail, id, name });
       setProfiles({ user: newUserProfile });
+      router.replace("/dashboard");
     } catch (error) {
       console.log(error);
       const message =
