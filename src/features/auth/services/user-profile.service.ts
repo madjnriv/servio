@@ -1,6 +1,7 @@
 import { COLLECTION_ID, DATABASE_ID } from "@/shared/constants/database";
 import { tablesDB } from "@/shared/lib/appwrite";
 import { RawUserProfile, UserProfile } from "@/shared/types/user.types";
+import { Permission, Role } from "react-native-appwrite";
 
 export const userProfileService = {
   create: async (id: string): Promise<UserProfile> => {
@@ -11,6 +12,10 @@ export const userProfileService = {
       data: {
         $id: id,
       },
+      permissions: [
+        Permission.read(Role.user(id)),
+        Permission.update(Role.user(id)),
+      ],
     });
 
     return {
