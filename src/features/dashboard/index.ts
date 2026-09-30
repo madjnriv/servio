@@ -7,3 +7,4 @@ export type {
 } from "../../shared/types/services.types";
 export { Header } from "./components/header";
 export { ServiceCategories } from "./components/service-categories";
+export { TopPicks } from "./components/top-picks";

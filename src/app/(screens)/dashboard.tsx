@@ -1,13 +1,13 @@
-import { Header, ServiceCategories } from "@/features/dashboard";
+import { Header, ServiceCategories, TopPicks } from "@/features/dashboard";
 import { useAuthContext } from "@/shared/hooks/use-auth";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, ScrollView } from "react-native";
 
 const Dashboard = () => {
   const { providerProfile } = useAuthContext();
 
   return (
-    <View
-      className="flex-1 bg-background"
+    <ScrollView
+      className="flex-1 pb-5 bg-background"
       onStartShouldSetResponder={() => {
         Keyboard.dismiss();
         return false;
@@ -18,7 +18,10 @@ const Dashboard = () => {
         isProvider={Boolean(providerProfile?.businessName)}
       />
       <ServiceCategories />
-    </View>
+      <View className="p-3 mt-5">
+        <TopPicks />
+      </View>
+    </ScrollView>
   );
 };
 

@@ -9,13 +9,14 @@ import { useAuthContext } from "@/shared/hooks/use-auth";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-native-sonner";
+import { userProfileService } from "../services/user-profile.service";
 
 interface RegisterFormProps {
   className?: string;
 }
 export const RegisterForm = ({ className }: RegisterFormProps) => {
   const { theme } = UseThemeColor();
-  const { setAuth } = useAuthContext();
+  const { setAuth, setProfiles } = useAuthContext();
 
   const {
     control,
@@ -42,7 +43,10 @@ export const RegisterForm = ({ className }: RegisterFormProps) => {
         password: "",
       });
 
+      const newUserProfile = await userProfileService.create(id);
+
       setAuth({ email: newUserEmail, id, name });
+      setProfiles({ user: newUserProfile });
     } catch (error) {
       console.log(error);
       const message =

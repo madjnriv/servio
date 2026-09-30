@@ -6,24 +6,29 @@ import {
   useMemo,
   useState,
 } from "react";
-import { User } from "../types/user.types";
+import { AuthUser, RawUserProfile, UserProfile } from "../types/user.types";
 import { getErrorMessage } from "../lib/get-error-msg";
 import { account, tablesDB } from "../lib/appwrite";
 import { ScreenLoader } from "../components/screen-loader";
 import { useRouter } from "expo-router";
-import { ProviderProfile } from "../types/provider-profile";
+import { ProviderProfile, RawProviderProfile } from "../types/provider-profile";
 import { COLLECTION_ID, DATABASE_ID } from "../constants/database";
 import { Query } from "react-native-appwrite";
 
+interface ProfilesParams {
+  user?: UserProfile;
+  provider?: ProviderProfile;
+}
 interface AuthContextValue {
-  user: User | null;
+  authUser: AuthUser | null;
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  setAuth: (user: User) => void;
+  setAuth: (user: AuthUser) => void;
   clearAuth: () => void;
+  userProfile: UserProfile | null;
   providerProfile: ProviderProfile | null;
-  setProfiles: (profile: ProviderProfile) => void;
+  setProfiles: (params: ProfilesParams) => void;
 }
 
 interface AuthProviderProps {
@@ -35,7 +40,8 @@ export const AuthContext = createContext<AuthContextValue | undefined>(
 );
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [providerProfile, setProviderProfile] =
     useState<ProviderProfile | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -43,22 +49,27 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  const setAuth = useCallback((user: User) => {
-    setUser(user);
+  const setAuth = useCallback((authUser: AuthUser) => {
+    setAuthUser(authUser);
     // setToken(token);
     setIsAuthenticated(true);
     setIsLoading(false);
   }, []);
 
   const clearAuth = useCallback(() => {
-    setUser(null);
+    setAuthUser(null);
     setToken(null);
     setIsAuthenticated(false);
     setIsLoading(false);
   }, []);
 
-  const setProfiles = useCallback((profile: ProviderProfile) => {
-    setProviderProfile(profile);
+  const setProfiles = useCallback(({ provider, user }: ProfilesParams) => {
+    if (provider) {
+      setProviderProfile(provider);
+    }
+    if (user) {
+      setUserProfile(user);
+    }
   }, []);
 
   const getInitialAuthState = useCallback(async () => {
@@ -70,41 +81,50 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { name, email, $id: userID } = currentUser;
 
       // GET USER'S PROVIDER PROFILE
-      const result = await tablesDB.listRows({
+      const providerProfile = await tablesDB.listRows<RawProviderProfile>({
         databaseId: DATABASE_ID,
         tableId: COLLECTION_ID.PROVIDER_PROFILE,
         queries: [Query.equal("user_profile_id", currentUser.$id)],
       });
 
-      const profile = result.rows[0];
-      if (!profile) return null;
+      const provider = providerProfile.rows[0];
+      if (!provider) return null;
 
-      const {
-        $id: providerID,
-        user_profile_id,
-        business_name,
-        business_email,
-        bio,
-        location,
-        service_categories,
-        is_available,
-        is_verified,
-      } = profile;
+      // GET USER'S PROFILE
+      const userProfile = await tablesDB.listRows<RawUserProfile>({
+        databaseId: DATABASE_ID,
+        tableId: COLLECTION_ID.USER_PROFILE,
+        queries: [Query.equal("$id", currentUser.$id)],
+      });
+
+      const user = userProfile.rows[0];
+      if (!user) return null;
 
       // SET USER CONTEXT
-      setUser({ name, email, id: userID });
+      setAuthUser({ name, email, id: userID });
 
       // SET PROVIDER PROFILE CONTEXT
       setProviderProfile({
-        id: providerID,
-        userProfileId: user_profile_id,
-        businessName: business_name,
-        businessEmail: business_email,
-        serviceCategories: service_categories,
-        isAvailable: is_available,
-        isVerified: is_verified,
-        bio,
-        location,
+        id: provider.$id,
+        userProfileId: provider.user_profile_id,
+        businessName: provider.business_name,
+        businessEmail: provider.business_email,
+        serviceCategories: provider.service_categories,
+        isAvailable: provider.is_available,
+        isVerified: provider.is_verified,
+        bio: provider.bio,
+        location: provider.location,
+      });
+
+      // SET USER PROFILE CONTEXT
+      setUserProfile({
+        id: user.$id,
+        isActive: user.is_active,
+        isVerified: user.is_verified,
+        role: user.role,
+        createdAt: user.$createdAt,
+        updatedAt: user.$updatedAt,
+        avatarUrl: user.avatar_url,
       });
 
       setIsAuthenticated(true);
@@ -114,7 +134,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const message = getErrorMessage(error);
       // toast.error(message, { toasterId: "auth-state-error" });
-      setUser(null);
+      setAuthUser(null);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -129,17 +149,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     () => ({
       isAuthenticated,
       isLoading,
-      user,
+      authUser,
       token,
       setAuth,
       clearAuth,
       providerProfile,
+      userProfile,
       setProfiles,
     }),
     [
       isAuthenticated,
       isLoading,
-      user,
+      authUser,
       token,
       setAuth,
       clearAuth,
