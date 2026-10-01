@@ -80,51 +80,55 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       // GET USER DATA
       const { name, email, $id: userID } = currentUser;
 
-      // GET USER'S PROVIDER PROFILE
-      const providerProfile = await tablesDB.listRows<RawProviderProfile>({
-        databaseId: DATABASE_ID,
-        tableId: COLLECTION_ID.PROVIDER_PROFILE,
-        queries: [Query.equal("user_profile_id", currentUser.$id)],
-      });
+      // GET USER & PROVIDER PROFILE
+      const [providerResult, userResult] = await Promise.allSettled([
+        tablesDB.listRows<RawProviderProfile>({
+          databaseId: DATABASE_ID,
+          tableId: COLLECTION_ID.PROVIDER_PROFILE,
+          queries: [Query.equal("user_profile_id", currentUser.$id)],
+        }),
 
-      const provider = providerProfile.rows[0];
-      if (!provider) return null;
+        tablesDB.listRows<RawUserProfile>({
+          databaseId: DATABASE_ID,
+          tableId: COLLECTION_ID.USER_PROFILE,
+          queries: [Query.equal("$id", currentUser.$id)],
+        }),
+      ]);
 
-      // GET USER'S PROFILE
-      const userProfile = await tablesDB.listRows<RawUserProfile>({
-        databaseId: DATABASE_ID,
-        tableId: COLLECTION_ID.USER_PROFILE,
-        queries: [Query.equal("$id", currentUser.$id)],
-      });
+      const providerProfile =
+        providerResult.status === "fulfilled"
+          ? providerResult.value.rows[0]
+          : null;
+      const userProfile =
+        userResult.status === "fulfilled" ? userResult.value.rows[0] : null;
 
-      const user = userProfile.rows[0];
-      if (!user) return null;
+      if (!providerProfile || !userProfile) return null;
 
       // SET USER CONTEXT
       setAuthUser({ name, email, id: userID });
 
       // SET PROVIDER PROFILE CONTEXT
       setProviderProfile({
-        id: provider.$id,
-        userProfileId: provider.user_profile_id,
-        businessName: provider.business_name,
-        businessEmail: provider.business_email,
-        serviceCategories: provider.service_categories,
-        isAvailable: provider.is_available,
-        isVerified: provider.is_verified,
-        bio: provider.bio,
-        location: provider.location,
+        id: providerProfile.$id,
+        userProfileId: providerProfile.user_profile_id,
+        businessName: providerProfile.business_name,
+        businessEmail: providerProfile.business_email,
+        serviceCategories: providerProfile.service_categories,
+        isAvailable: providerProfile.is_available,
+        isVerified: providerProfile.is_verified,
+        bio: providerProfile.bio,
+        location: providerProfile.location,
       });
 
       // SET USER PROFILE CONTEXT
       setUserProfile({
-        id: user.$id,
-        isActive: user.is_active,
-        isVerified: user.is_verified,
-        role: user.role,
-        createdAt: user.$createdAt,
-        updatedAt: user.$updatedAt,
-        avatarUrl: user.avatar_url,
+        id: userProfile.$id,
+        isActive: userProfile.is_active,
+        isVerified: userProfile.is_verified,
+        role: userProfile.role,
+        createdAt: userProfile.$createdAt,
+        updatedAt: userProfile.$updatedAt,
+        avatarUrl: userProfile.avatar_url,
       });
 
       setIsAuthenticated(true);
