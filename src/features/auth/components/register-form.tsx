@@ -39,16 +39,17 @@ export const RegisterForm = ({ className }: RegisterFormProps) => {
     try {
       console.log("Register form submitted");
       const { newUserEmail, name, id } = await authService.register(data);
-      reset({
-        name: "",
-        email: "",
-        password: "",
-      });
 
       const newUserProfile = await userProfileService.create(id);
 
       setAuth({ email: newUserEmail, id, name });
       setProfiles({ user: newUserProfile });
+
+      reset({
+        name: "",
+        email: "",
+        password: "",
+      });
       router.replace("/dashboard");
     } catch (error) {
       console.log(error);

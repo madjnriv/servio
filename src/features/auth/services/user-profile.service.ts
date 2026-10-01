@@ -12,10 +12,11 @@ export const userProfileService = {
       data: {
         $id: id,
       },
-      permissions: [
-        Permission.read(Role.user(id)),
-        Permission.update(Role.user(id)),
-      ],
+      // permissions: [
+      //   Permission.read(Role.any()),
+      //   Permission.update(Role.any()),
+      //   Permission.write(Role.any()),
+      // ],
     });
 
     return {
