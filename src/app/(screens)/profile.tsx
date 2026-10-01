@@ -7,7 +7,7 @@ import { getErrorMessage } from "@/shared/lib/get-error-msg";
 import { ProfileInfoCard } from "@/features/profile";
 
 const Profile = () => {
-  const { clearAuth, user } = useAuthContext();
+  const { clearAuth, authUser } = useAuthContext();
 
   const handleLogout = async () => {
     try {
@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <View className="mt-56">
-      <ProfileInfoCard user={user} />
+      <ProfileInfoCard user={authUser} />
 
       <Button onPress={handleLogout}>Log out</Button>
     </View>
