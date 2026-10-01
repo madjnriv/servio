@@ -12,6 +12,7 @@ import { toast } from "react-native-sonner";
 import { providerProfileService } from "../services/provider-profile.service";
 import { AppwriteException } from "react-native-appwrite";
 import { useRouter } from "expo-router";
+import { userProfileService } from "../services/user-profile.service";
 
 interface LoginFormProps {
   className?: string;
@@ -43,13 +44,16 @@ export const LoginForm = ({ className }: LoginFormProps) => {
         email: data.email,
         password: data.password,
       });
+      const providerProfile = await providerProfileService.getProfile();
+      const userProfile = await userProfileService.get(id);
+      setAuth({ email: userEmail, id, name });
+      if (providerProfile) setProfiles({ provider: providerProfile });
+      if (userProfile) setProfiles({ user: userProfile });
+
       reset({
         email: "",
         password: "",
       });
-      const providerProfile = await providerProfileService.getProfile();
-      setAuth({ email: userEmail, id, name });
-      if (providerProfile) setProfiles(providerProfile);
       router.replace("/dashboard");
     } catch (error) {
       console.log(error);

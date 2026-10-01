@@ -3,7 +3,8 @@ import { useAuthContext } from "@/shared/hooks/use-auth";
 import { View, Keyboard, ScrollView } from "react-native";
 
 const Dashboard = () => {
-  const { providerProfile } = useAuthContext();
+  const { providerProfile, authUser } = useAuthContext();
+  const displayName = authUser?.name.split(" ")[0];
 
   return (
     <ScrollView
@@ -14,7 +15,7 @@ const Dashboard = () => {
       }}
     >
       <Header
-        name="Jaxon"
+        name={displayName ?? "GUEST"}
         isProvider={Boolean(providerProfile?.businessName)}
       />
       <ServiceCategories />
