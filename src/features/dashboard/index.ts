@@ -1,5 +1,4 @@
 export { ServicesProvider } from "../../shared/contexts/services-context";
-export { useServices } from "../../shared/hooks/use-services";
 export type {
   PricingUnit,
   Service,
@@ -7,4 +6,4 @@ export type {
 } from "../../shared/types/services.types";
 export { Header } from "./components/header";
 export { ServiceCategories } from "./components/service-categories";
-export { TopPicks } from "./components/top-picks";
+export { TopPicksCard } from "./components/top-picks-card";

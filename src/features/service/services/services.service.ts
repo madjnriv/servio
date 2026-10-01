@@ -38,7 +38,7 @@ export const servicesService = {
       return null;
     }
 
-    const categoryID = categoryRow.$id;
+    const categoryName = categoryRow.name;
     const slug = createServiceSlug(name);
     const priceAsNum = Number(price);
 
@@ -52,11 +52,11 @@ export const servicesService = {
         excerpt,
         price: priceAsNum,
         pricing_unit: pricingUnit,
-        category_id: categoryID,
+        category: categoryName,
         provider_id: providerID,
         slug,
       },
-      permissions: [Permission.read(Role.any()), Permission.create(Role.any())],
+      // permissions: [Permission.read(Role.any()), Permission.write(Role.any())],
     });
 
     return {
@@ -67,13 +67,34 @@ export const servicesService = {
       description: newService.description,
       pricingUnit: newService.pricing_unit,
       price: newService.price,
-      categoryId: newService.category_id,
+      category: newService.category_id,
       providerId: newService.provider_id,
       isActive: newService.is_active,
       createdAt: newService.$createdAt,
     };
   },
-  getAll: async () => {},
+  getAll: async (): Promise<Service[] | null> => {
+    const services = await tablesDB.listRows<RawService>({
+      databaseId: DATABASE_ID,
+      tableId: COLLECTION_ID.SERVICE,
+    });
+
+    if (!services.rows.length) return null;
+
+    return services.rows.map((service) => ({
+      id: service.$id,
+      name: service.name,
+      slug: service.slug,
+      excerpt: service.excerpt,
+      description: service.description,
+      pricingUnit: service.pricing_unit,
+      price: service.price,
+      categoryId: service.category_id,
+      providerId: service.provider_id,
+      isActive: service.is_active,
+      createdAt: service.$createdAt,
+    }));
+  },
   getById: async () => {},
   delete: async (id: string) => {},
 };

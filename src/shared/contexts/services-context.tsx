@@ -15,7 +15,9 @@ interface ServicesProviderProps {
 export const ServicesProvider = ({ children }: ServicesProviderProps) => {
   const [services, setServices] = useState<Service[]>([]);
 
-  const setServicesContext = useCallback(() => {}, []);
+  const setServicesContext = useCallback((services: Service[]) => {
+    setServices(services);
+  }, []);
 
   const value = useMemo(() => ({ services, setServicesContext }), [services]);
 

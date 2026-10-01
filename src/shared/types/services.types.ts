@@ -13,7 +13,7 @@ export interface Service {
   isActive?: boolean;
 
   providerId?: string;
-  categoryId?: string;
+  category?: string;
 
   price: number;
   createdAt: string;
