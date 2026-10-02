@@ -36,13 +36,14 @@ const Dashboard = () => {
         isProvider={Boolean(providerProfile?.businessName)}
       />
       <ServiceCategories />
-      <View className="p-3 mt-5">
+      <View className="p-3 mt-5 gap-y-5">
         <Text className="text-foreground text-xl">Top Picks for you</Text>
         {services && services.length > 0 ? (
           <FlatList
             data={services}
-            renderItem={({ item }) => <TopPicksCard services={item} />}
+            renderItem={({ item }) => <TopPicksCard service={item} />}
             keyExtractor={(item) => item.id}
+            contentContainerClassName="gap-y-3"
           />
         ) : (
           <Text>No Service Found. Check in Later</Text>

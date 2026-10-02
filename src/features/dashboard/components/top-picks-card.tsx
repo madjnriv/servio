@@ -11,23 +11,44 @@ import {
 import { Button } from "@/shared/components/button";
 import { useAuthContext } from "@/shared/hooks/use-auth";
 import { Service } from "@/shared/types/services.types";
-const ImgOne = require("../../../assets/user32212-home-2486092_1920.jpg");
+import { Feather } from "@expo/vector-icons";
+import { UseThemeColor } from "@/shared/hooks/use-theme-color";
+import { Label } from "@/shared/components/label";
+const ImgOne = require("../../../assets/cleaning.jpg");
 
 interface TopPicksProps {
-  services: Service;
+  service: Service;
 }
-export const TopPicksCard = ({ services }: TopPicksProps) => {
+export const TopPicksCard = ({ service }: TopPicksProps) => {
   const { userProfile } = useAuthContext();
+  const { theme } = UseThemeColor();
   return (
-    <Card className="relative h-52">
-      <Image source={ImgOne} className="h-full w-full rounded-2xl" />
+    <Card className="">
+      <Image source={ImgOne} className="h-48 w-full rounded-t-2xl" />
 
-      <View className="absolute bottom-0 left-0 right-0 h-24 rounded-b-2xl justify-between items-end bg-primary-foreground/50">
-        <CardHeader>
-          <CardTitle className="text-foreground">{services.name}</CardTitle>
-          <CardDescription>{services.excerpt}</CardDescription>
-        </CardHeader>
-      </View>
+      <CardHeader className="pb-0">
+        {service.category && (
+          <Label className="self-start text-sm text-accent bg-accent/10 border border-accent px-2 rounded-full">
+            {service.category}
+          </Label>
+        )}
+        <CardTitle className="mt-3">{service.name}</CardTitle>
+        <CardDescription>{service.excerpt}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-row items-center justify-between">
+        <Text className="text-foreground">
+          <Text className="text-card-foreground text-lg font-light">
+            $ {service.price} /
+          </Text>{" "}
+          <Text className="text-xs font-light text-muted-foreground">
+            {service.pricingUnit}
+          </Text>
+        </Text>
+
+        <Button className="w-11 h-11">
+          <Feather name="arrow-up-right" size={20} color={theme.card} />
+        </Button>
+      </CardContent>
     </Card>
   );
 };
