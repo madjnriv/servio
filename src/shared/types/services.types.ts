@@ -39,7 +39,7 @@ export interface RawService extends Models.DefaultRow {
   is_active?: boolean;
 
   provider_id: string;
-  category_id: string;
+  category: string;
 
   price: number;
 }

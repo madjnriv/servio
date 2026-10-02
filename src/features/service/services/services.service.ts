@@ -1,7 +1,7 @@
 import { DATABASE_ID, COLLECTION_ID } from "@/shared/constants/database";
 import { CreateServiceDto } from "../schemas/create-service.schema";
 import { tablesDB } from "@/shared/lib/appwrite";
-import { ID, Permission, Query, Role } from "react-native-appwrite";
+import { ID, Query } from "react-native-appwrite";
 import {
   RawService,
   RawServiceCategory,
@@ -67,7 +67,7 @@ export const servicesService = {
       description: newService.description,
       pricingUnit: newService.pricing_unit,
       price: newService.price,
-      category: newService.category_id,
+      category: newService.category,
       providerId: newService.provider_id,
       isActive: newService.is_active,
       createdAt: newService.$createdAt,
@@ -89,7 +89,7 @@ export const servicesService = {
       description: service.description,
       pricingUnit: service.pricing_unit,
       price: service.price,
-      categoryId: service.category_id,
+      category: service.category,
       providerId: service.provider_id,
       isActive: service.is_active,
       createdAt: service.$createdAt,
