@@ -5,7 +5,7 @@ interface AvatarProps {
   src?: ImageSourcePropType;
   fallback?: string;
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "secondary";
+  variant?: "default" | "secondary" | "outline";
 }
 export const Avatar = ({
   className,
@@ -17,7 +17,7 @@ export const Avatar = ({
   return (
     <View
       className={` justify-center items-center rounded-full ${size === "sm" ? "w-10 h-10" : size === "md" ? "w-16 h-16" : "w-20 h-20"}
-      ${variant === "secondary" ? "bg-primary-foreground/10 border border-border/50" : "bg-muted-foreground"}
+      ${variant === "outline" ? "bg-primary-foreground/10 border border-border/50" : variant === "secondary" ? "bg-muted-foreground/10" : "bg-muted-foreground"}
       `}
     >
       {src ? (
