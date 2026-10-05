@@ -1,15 +1,13 @@
-import { View, Text, Image } from "react-native";
+import { Text, Image } from "react-native";
 import React from "react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/shared/components/card";
 import { Button } from "@/shared/components/button";
-import { useAuthContext } from "@/shared/hooks/use-auth";
 import { Service } from "@/shared/types/services.types";
 import { Feather } from "@expo/vector-icons";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
@@ -20,10 +18,9 @@ interface TopPicksProps {
   service: Service;
 }
 export const TopPicksCard = ({ service }: TopPicksProps) => {
-  const { userProfile } = useAuthContext();
   const { theme } = UseThemeColor();
   return (
-    <Card className="">
+    <Card className="w-[23.5rem]">
       <Image source={ImgOne} className="h-48 w-full rounded-t-2xl" />
 
       <CardHeader className="pb-0">

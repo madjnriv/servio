@@ -40,10 +40,12 @@ const Dashboard = () => {
         <Text className="text-foreground text-xl">Top Picks for you</Text>
         {services && services.length > 0 ? (
           <FlatList
+            horizontal={true}
             data={services}
             renderItem={({ item }) => <TopPicksCard service={item} />}
             keyExtractor={(item) => item.id}
-            contentContainerClassName="gap-y-3"
+            contentContainerClassName="gap-x-3"
+            showsHorizontalScrollIndicator={false}
           />
         ) : (
           <Text>No Service Found. Check in Later</Text>
