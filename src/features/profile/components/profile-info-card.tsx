@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/card";
+import { DEFAULT_USER_IMAGE } from "@/shared/constants/img-fallback";
 import { AuthUser } from "@/shared/types/user.types";
 import ChevronRight from "@hugeicons/core-free-icons/ArrowRight01Icon";
 import { HugeiconsIcon } from "@hugeicons/react-native";
@@ -20,10 +21,10 @@ export const ProfileInfoCard = ({ authUser }: ProfileInfoCardProps) => {
     <Card className="flex-row items-center justify-between py-0 px-3 rounded-[2rem]">
       <View className="flex-row items-center gap-x-0.5">
         <Avatar
-          fallback="SO"
+          src={DEFAULT_USER_IMAGE}
           size="md"
           variant="secondary"
-          className="font-bold text-xl"
+          className="w-full h-full rounded-full"
         />
         <CardHeader className="py-0 px-0 gap-0">
           <CardTitle>
