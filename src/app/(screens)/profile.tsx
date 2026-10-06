@@ -7,7 +7,8 @@ import { getErrorMessage } from "@/shared/lib/get-error-msg";
 import { ProfileInfoCard, SubscribePro } from "@/features/profile";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { HugeiconsIcon } from "@hugeicons/react-native";
-import { ArrowLeft02Icon, Search01Icon } from "@hugeicons/core-free-icons";
+import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
+import Search01Icon from "@hugeicons/core-free-icons/Search01Icon";
 
 const Profile = () => {
   const { clearAuth, authUser } = useAuthContext();

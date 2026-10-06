@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/shared/components/card";
 import { AuthUser } from "@/shared/types/user.types";
-import { ChevronRight } from "@hugeicons/core-free-icons";
+import ChevronRight from "@hugeicons/core-free-icons/ArrowRight01Icon";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import { View, Text } from "react-native";
 

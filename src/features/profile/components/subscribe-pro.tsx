@@ -8,7 +8,8 @@ import {
 } from "@/shared/components/card";
 import { Button } from "@/shared/components/button";
 import { HugeiconsIcon } from "@hugeicons/react-native";
-import { ChevronRight, FireIcon } from "@hugeicons/core-free-icons";
+import ChevronRight from "@hugeicons/core-free-icons/ArrowRight01Icon";
+import FireIcon from "@hugeicons/core-free-icons/FireIcon";
 
 export const SubscribePro = () => {
   return (
