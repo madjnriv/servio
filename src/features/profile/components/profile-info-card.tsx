@@ -17,9 +17,14 @@ interface ProfileInfoCardProps {
 
 export const ProfileInfoCard = ({ authUser }: ProfileInfoCardProps) => {
   return (
-    <Card className="flex-row items-center justify-between px-3">
-      <View className="flex-row items-center gap-3">
-        <Avatar fallback="SO" size="md" variant="secondary" />
+    <Card className="flex-row items-center justify-between py-0 px-3 rounded-[2rem]">
+      <View className="flex-row items-center gap-x-0.5">
+        <Avatar
+          fallback="SO"
+          size="md"
+          variant="secondary"
+          className="font-bold text-xl"
+        />
         <CardHeader className="py-0 px-0 gap-0">
           <CardTitle>
             <Text className="text-base">

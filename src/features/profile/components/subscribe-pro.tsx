@@ -1,44 +1,47 @@
 import { View, Text } from "react-native";
 import React from "react";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/shared/components/card";
+import { Card, CardHeader, CardTitle } from "@/shared/components/card";
 import { Button } from "@/shared/components/button";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import ChevronRight from "@hugeicons/core-free-icons/ArrowRight01Icon";
-import FireIcon from "@hugeicons/core-free-icons/FireIcon";
+import AiMagicIcon from "@hugeicons/core-free-icons/AiMagicIcon";
 
 export const SubscribePro = () => {
   return (
-    <Card className="border-0 bg-primary flex-row items-center justify-between">
-      <View className="flex-row items-center gap-3">
-        <View className="w-12 h-12">
-          <HugeiconsIcon icon={FireIcon} size={20} />
+    <Card className="w-full flex-row items-center justify-between gap-x-1 border-0 bg-foreground/95 px-3 rounded-[2rem]">
+      <View className="min-w-0 flex-1 flex-row items-center gap-3">
+        <View className="h-10 w-10 shrink-0 items-center justify-center">
+          <HugeiconsIcon
+            icon={AiMagicIcon}
+            size={40}
+            className="text-primary-foreground"
+          />
         </View>
 
-        <CardHeader className="py-0 px-0 gap-0">
+        <CardHeader className="min-w-0 flex-1 gap-0 p-0">
           <CardTitle>
-            <Text className="text-xl text-primary-foreground">
+            <Text className="text-base text-primary-foreground">
               Upgrade to Pro
             </Text>
           </CardTitle>
-          <CardDescription className="">
-            <Text className="text-primary-foreground">
-              {" "}
-              Unlock premium tools. Get faster support.
-            </Text>
-            <Text className="text-primary-foreground">
-              Enjoy priority assistance and advanced features.
-            </Text>
-          </CardDescription>
+          <Text className="text-xs text-muted-foreground">
+            Unlock premium tools. Get faster support. Enjoy priority assistance
+            and advanced features.
+          </Text>
         </CardHeader>
       </View>
-      <Button className="bg-transparent h-11 w-11">
-        <Text>Upgrade</Text>
-        <HugeiconsIcon icon={ChevronRight} className="text-foreground/50" />
+      <Button
+        icon
+        className="h-11 shrink-0 flex-row gap-1 bg-accent/50 border border-accent px-2"
+      >
+        <Text className="text-sm font-semibold text-primary-foreground">
+          Upgrade
+        </Text>
+        <HugeiconsIcon
+          icon={ChevronRight}
+          size={19}
+          className="text-primary-foreground"
+        />
       </Button>
     </Card>
   );
