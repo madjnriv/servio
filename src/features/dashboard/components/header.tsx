@@ -1,11 +1,11 @@
 import { Avatar } from "@/shared/components/avatar";
 import { View, Text } from "react-native";
-const defaultAvatar = require("../../../assets/demo-img.jpg");
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { Input } from "@/shared/components/input";
 import { Button } from "@/shared/components/button";
 import { useRouter } from "expo-router";
+import { DEFAULT_USER_IMAGE } from "@/shared/constants/img-fallback";
 
 interface HeaderProps {
   name: string;
@@ -20,7 +20,7 @@ export const Header = ({ name, location, isProvider }: HeaderProps) => {
       <View className="flex-row justify-between items-center">
         <View className="flex-row items-center justify-center gap-2">
           <Avatar
-            src={defaultAvatar}
+            src={DEFAULT_USER_IMAGE}
             variant="secondary"
             className="w-full h-full rounded-full"
           />
