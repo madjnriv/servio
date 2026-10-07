@@ -6,6 +6,7 @@ import { Input } from "@/shared/components/input";
 import { Button } from "@/shared/components/button";
 import { useRouter } from "expo-router";
 import { DEFAULT_USER_IMAGE } from "@/shared/constants/img-fallback";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface HeaderProps {
   name: string;
@@ -13,10 +14,15 @@ interface HeaderProps {
   isProvider?: boolean;
 }
 export const Header = ({ name, location, isProvider }: HeaderProps) => {
+  const insets = useSafeAreaInsets();
+
   const { theme } = UseThemeColor();
   const router = useRouter();
   return (
-    <View className="pt-20 h-60 bg-primary p-3 rounded-b-[3rem]">
+    <View
+      style={{ paddingTop: insets.top }}
+      className="h-52 bg-primary p-3 rounded-b-[3rem] relative"
+    >
       <View className="flex-row justify-between items-center">
         <View className="flex-row items-center justify-center gap-2">
           <Avatar
