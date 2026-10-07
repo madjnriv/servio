@@ -16,11 +16,8 @@ export const ProfileSettings = () => {
       {/* accountSettings */}
       <Card className="border-0 rounded-3xl px-3">
         {accountSettings.map((item) => (
-          <>
-            <CardContent
-              key={item.id}
-              className="flex-row items-center justify-between"
-            >
+          <View key={item.id}>
+            <CardContent className="flex-row items-center justify-between">
               <View className="flex-row items-center gap-x-3">
                 <HugeiconsIcon
                   icon={item.icon}
@@ -44,18 +41,15 @@ export const ProfileSettings = () => {
             {item.id !== accountSettings[accountSettings.length - 1].id && (
               <Separator className="w-[90%] mx-auto" />
             )}
-          </>
+          </View>
         ))}
       </Card>
 
       {/* preferencesSettings */}
       <Card className="border-0 rounded-3xl px-3">
         {preferencesSettings.map((item) => (
-          <>
-            <CardContent
-              key={item.id}
-              className="flex-row items-center justify-between"
-            >
+          <View key={item.id}>
+            <CardContent className="flex-row items-center justify-between">
               <View className="flex-row items-center gap-x-3">
                 <HugeiconsIcon
                   icon={item.icon}
@@ -80,18 +74,15 @@ export const ProfileSettings = () => {
               preferencesSettings[preferencesSettings.length - 1].id && (
               <Separator className="w-[90%] mx-auto" />
             )}
-          </>
+          </View>
         ))}
       </Card>
 
       {/* generalSettings */}
       <Card className="border-0 rounded-3xl px-3">
         {generalSettings.map((item) => (
-          <>
-            <CardContent
-              key={item.id}
-              className="flex-row items-center justify-between"
-            >
+          <View key={item.id}>
+            <CardContent className="flex-row items-center justify-between">
               <View className="flex-row items-center gap-x-3">
                 <HugeiconsIcon
                   icon={item.icon}
@@ -119,7 +110,7 @@ export const ProfileSettings = () => {
             {item.id !== generalSettings[generalSettings.length - 1].id && (
               <Separator className="w-[90%] mx-auto" />
             )}
-          </>
+          </View>
         ))}
       </Card>
     </View>

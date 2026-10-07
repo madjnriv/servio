@@ -9,7 +9,7 @@ import {
   ProfileSettings,
   SubscribePro,
 } from "@/features/profile";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
 import Search01Icon from "@hugeicons/core-free-icons/Search01Icon";
@@ -17,6 +17,7 @@ import LogoutSquare01Icon from "@hugeicons/core-free-icons/LogoutSquare01Icon";
 
 const Profile = () => {
   const { clearAuth, authUser } = useAuthContext();
+  const insets = useSafeAreaInsets();
 
   const handleLogout = async () => {
     try {
@@ -31,24 +32,41 @@ const Profile = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1">
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentInsetAdjustmentBehavior="never"
-        className="p-3"
-      >
-        <View className="flex-row justify-between items-center">
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentInsetAdjustmentBehavior="never"
+      className="flex-1 relative bg-background"
+      style={{ paddingBottom: insets.bottom }}
+      stickyHeaderIndices={[0]}
+    >
+      {/* HEADER */}
+      <View>
+        <View
+          style={{ paddingTop: insets.top }}
+          className="flex-row justify-between items-center py-3  px-3 bg-background"
+        >
           <Button className="bg-transparent border border-border h-11 w-11">
-            <HugeiconsIcon icon={ArrowLeft02Icon} className="text-foreground" />
+            <HugeiconsIcon
+              icon={ArrowLeft02Icon}
+              className="text-foreground"
+              size={20}
+            />
           </Button>
 
           <Text className="text-lg font-semibold">Profile</Text>
 
           <Button className="bg-transparent border border-border h-11 w-11">
-            <HugeiconsIcon icon={Search01Icon} className="text-foreground" />
+            <HugeiconsIcon
+              icon={Search01Icon}
+              className="text-foreground"
+              size={20}
+            />
           </Button>
         </View>
+      </View>
 
+      {/* CONTENT */}
+      <View className="pb-10 px-3">
         <View className="mt-5">
           <ProfileInfoCard authUser={authUser} />
         </View>
@@ -74,8 +92,8 @@ const Profile = () => {
             className="text-primary-foreground"
           />
         </Button>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   );
 };
 
