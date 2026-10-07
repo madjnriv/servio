@@ -35,7 +35,7 @@ const Dashboard = () => {
         return false;
       }}
     >
-      <ScrollView className="bg-background">
+      <View className="bg-background">
         <Header
           name={displayName ?? "GUEST"}
           isProvider={Boolean(providerProfile?.businessName)}
@@ -64,7 +64,7 @@ const Dashboard = () => {
             )}
           </View>
         </View>
-      </ScrollView>
+      </View>
     </ScrollView>
   );
 };
