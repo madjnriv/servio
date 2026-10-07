@@ -1,5 +1,5 @@
 import { Avatar } from "@/shared/components/avatar";
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { Input } from "@/shared/components/input";
@@ -21,7 +21,7 @@ export const Header = ({ name, location, isProvider }: HeaderProps) => {
   return (
     <View
       style={{ paddingTop: insets.top }}
-      className="h-52 bg-primary p-3 rounded-b-[3rem] relative"
+      className={`bg-primary p-3 rounded-b-[2.5rem] relative`}
     >
       <View className="flex-row justify-between items-center">
         <View className="flex-row items-center justify-center gap-2">
