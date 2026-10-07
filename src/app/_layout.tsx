@@ -20,7 +20,7 @@ const RootLayout = () => {
           <Stack
             screenOptions={{
               headerShown: false,
-              animation: "none",
+              animation: "fade",
             }}
           />
           <Toaster

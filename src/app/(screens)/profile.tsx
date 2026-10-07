@@ -66,7 +66,7 @@ const Profile = () => {
       </View>
 
       {/* CONTENT */}
-      <View className="pb-10 px-3">
+      <View className="pb-28 px-3">
         <View className="mt-5">
           <ProfileInfoCard authUser={authUser} />
         </View>
