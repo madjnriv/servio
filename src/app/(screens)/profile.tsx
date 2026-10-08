@@ -89,7 +89,7 @@ const Profile = () => {
           </Text>
           <HugeiconsIcon
             icon={LogoutSquare01Icon}
-            className="text-primary-foreground"
+            className="text-primary-foreground  bg-primary"
           />
         </Button>
       </View>
