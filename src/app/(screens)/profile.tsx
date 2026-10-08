@@ -81,7 +81,7 @@ const Profile = () => {
 
         <Button
           onPress={handleLogout}
-          className="mt-10 p-3 gap-x-3"
+          className="mt-10 p-3 gap-x-3  bg-primary"
           icon={true}
         >
           <Text className="text-primary-foreground text-lg font-semibold">
@@ -89,7 +89,7 @@ const Profile = () => {
           </Text>
           <HugeiconsIcon
             icon={LogoutSquare01Icon}
-            className="text-primary-foreground  bg-primary"
+            className="text-primary-foreground"
           />
         </Button>
       </View>
