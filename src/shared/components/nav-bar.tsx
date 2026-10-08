@@ -21,7 +21,7 @@ export const NavBar = () => {
       className="absolute right-0 left-0"
       style={{ bottom: Platform.OS === "ios" ? insets.bottom - 12 : 20 }}
     >
-      <View className="w-[90%] mx-auto flex-row items-center gap-3">
+      <View className="w-[70%] mx-auto flex-row items-center gap-3">
         <View className="bg-card border border-border p-3 flex-1 rounded-full flex-row items-center justify-between">
           <TouchableOpacity onPress={() => handleNavigate("/dashboard")}>
             <HugeiconsIcon icon={Home02Icon} />
