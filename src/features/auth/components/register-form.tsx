@@ -138,7 +138,7 @@ export const RegisterForm = ({ className }: RegisterFormProps) => {
 
       <Button
         onPress={handleSubmit(onSubmit)}
-        className="mt-3 w-full h-12"
+        className="mt-3 w-full h-12  bg-primary"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Loading..." : "Register"}

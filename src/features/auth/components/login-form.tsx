@@ -127,7 +127,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 
       <Button
         onPress={handleSubmit(onSubmit)}
-        className="mt-3 w-full h-12"
+        className="mt-3 w-full h-12  bg-primary"
         disabled={isSubmitting}
       >
         {isSubmitting ? <Text>Loading...</Text> : "Login"}
