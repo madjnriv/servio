@@ -12,3 +12,9 @@
 // };
 
 export const DEFAULT_USER_IMAGE = require("../../assets/defalut-user-img.jpg");
+
+export const PAYMENT_METHOD_IMG = {
+  VISA: require("../../assets/visa.png"),
+  PAYPAL: require("../../assets/paypal.png"),
+};
+export const CARD_CHIP = require("../../assets/chip.png");

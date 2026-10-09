@@ -1,9 +1,14 @@
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/shared/components/button";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
-import { BalanceCard, WalletCTA } from "@/features/wallet";
+import {
+  BalanceCard,
+  LinkedCard,
+  SAVED_PAYMENT_METHODS,
+  WalletCTA,
+} from "@/features/wallet";
 
 const Wallet = () => {
   const insets = useSafeAreaInsets();
@@ -41,6 +46,25 @@ const Wallet = () => {
         <View className="gap-3">
           <BalanceCard />
           <WalletCTA />
+        </View>
+        <View className="mt-10">
+          <View>
+            <Text className="text-lg text-muted-foreground font-semibold">
+              Linked Debit cards & Banks
+            </Text>
+          </View>
+          {SAVED_PAYMENT_METHODS && SAVED_PAYMENT_METHODS.length > 0 ? (
+            <FlatList
+              horizontal={true}
+              data={SAVED_PAYMENT_METHODS}
+              renderItem={({ item }) => <LinkedCard card={item} />}
+              keyExtractor={(item) => item.methodId}
+              contentContainerClassName="gap-x-3 mt-3"
+              showsHorizontalScrollIndicator={false}
+            />
+          ) : (
+            <Text>NO CARD LINKED</Text>
+          )}
         </View>
       </View>
     </ScrollView>

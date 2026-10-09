@@ -28,7 +28,7 @@ export const CardHeader = ({
   ...props
 }: CardHeaderProps) => {
   return (
-    <View {...props} className={`${className} flex-col gap-1 px-3 py-5`}>
+    <View {...props} className={`${className}  gap-1 px-3 py-5`}>
       {children}
     </View>
   );
