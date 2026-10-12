@@ -14,6 +14,7 @@ export const LinkedCard = ({ card }: LinkedCardProps) => {
     PAYMENT_METHOD_IMG[`${card?.kind === "VISA" ? "VISA" : "PAYPAL"}`];
   return (
     <Card
+      rmBg
       className={`w-[20rem] ${card?.isDefault ? "bg-primary border-primary" : "bg-amber-900/90 border-amber-900/90"}`}
     >
       <CardHeader className="flex-row justify-between items-center">

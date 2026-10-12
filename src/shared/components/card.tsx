@@ -4,6 +4,7 @@ import { Children, ReactNode } from "react";
 interface CardProps {
   children: ReactNode;
   className?: string;
+  rmBg?: boolean;
 }
 interface CardHeaderProps extends CardProps {}
 interface CardTitleProps extends CardProps {}
@@ -11,11 +12,16 @@ interface CardDescriptionProps extends CardProps {}
 interface CardContentProps extends CardProps {}
 interface CardFooterProps extends CardProps {}
 
-export const Card = ({ children, className, ...props }: CardProps) => {
+export const Card = ({
+  children,
+  className,
+  rmBg = false,
+  ...props
+}: CardProps) => {
   return (
     <Pressable
       {...props}
-      className={`${className} bg-card border border-border rounded-2xl`}
+      className={`${className} ${!rmBg && "bg-card"} border border-border rounded-2xl`}
     >
       {children}
     </Pressable>
