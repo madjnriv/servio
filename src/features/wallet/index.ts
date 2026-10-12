@@ -8,3 +8,4 @@ export {
   SavedPaymentMethod,
   SavedVisaCard,
 } from "./types/payment-method";
+export { InviteFriendCard } from "./components/invite-friend-card";

@@ -5,6 +5,7 @@ import { HugeiconsIcon } from "@hugeicons/react-native";
 import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
 import {
   BalanceCard,
+  InviteFriendCard,
   LinkedCard,
   SAVED_PAYMENT_METHODS,
   WalletCTA,
@@ -47,12 +48,12 @@ const Wallet = () => {
           <BalanceCard />
           <WalletCTA />
         </View>
+
+        {/* LINKED CARDS */}
         <View className="mt-10">
-          <View>
-            <Text className="text-lg text-muted-foreground font-semibold">
-              Linked Debit cards & Banks
-            </Text>
-          </View>
+          <Text className="text-lg text-muted-foreground font-semibold">
+            Linked Debit cards & Banks
+          </Text>
           {SAVED_PAYMENT_METHODS && SAVED_PAYMENT_METHODS.length > 0 ? (
             <FlatList
               horizontal={true}
@@ -65,6 +66,11 @@ const Wallet = () => {
           ) : (
             <Text>NO CARD LINKED</Text>
           )}
+        </View>
+
+        {/* INVITE A FRIEND CARD */}
+        <View className="mt-10">
+          <InviteFriendCard />
         </View>
       </View>
     </ScrollView>
