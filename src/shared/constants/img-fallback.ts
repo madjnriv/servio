@@ -18,3 +18,6 @@ export const PAYMENT_METHOD_IMG = {
   PAYPAL: require("../../assets/paypal.png"),
 };
 export const CARD_CHIP = require("../../assets/chip.png");
+export const DOLLAR_IMG = require("../../assets/dollar-coin.png");
+export const ETHEREUM_IMG = require("../../assets/ethereum.png");
+export const BITCOIN_IMG = require("../../assets/bitcoin.png");
