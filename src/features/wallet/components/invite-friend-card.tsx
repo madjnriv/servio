@@ -14,9 +14,9 @@ export const InviteFriendCard = () => {
     <Card className="bg-primary/10 border-0 flex-row items-center pb-3 px-3">
       <View>
         <CardHeader>
-          <CardTitle>
-            <Text className="text-foreground/80">
-              Invite a friend and get $10 in BTC
+          <CardTitle className="pr-14">
+            <Text className="text-foreground/80 text-wrap">
+              Invite a friend and get $10 in your Servio wallet
             </Text>
           </CardTitle>
         </CardHeader>
