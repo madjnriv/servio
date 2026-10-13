@@ -4,7 +4,7 @@ import Home02Icon from "@hugeicons/core-free-icons/Home02Icon";
 import WalletMinimalIcon from "@hugeicons/core-free-icons/WalletMinimalIcon";
 import Calendar03Icon from "@hugeicons/core-free-icons/Calendar03Icon";
 import User02Icon from "@hugeicons/core-free-icons/User02Icon";
-import AiArtIcon from "@hugeicons/core-free-icons/AiArtIcon";
+import BotIcon from "@hugeicons/core-free-icons/BotIcon";
 import { RoutePath, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { toast } from "react-native-sonner";
@@ -40,7 +40,7 @@ export const NavBar = () => {
           <TouchableOpacity
             onPress={() => toast.info("AI Agent is coming soon")}
           >
-            <HugeiconsIcon icon={AiArtIcon} />
+            <HugeiconsIcon icon={BotIcon} />
           </TouchableOpacity>
         </View>
       </View>
