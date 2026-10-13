@@ -3,11 +3,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/shared/components/button";
 import { HugeiconsIcon } from "@hugeicons/react-native";
 import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
+import Files01Icon from "@hugeicons/core-free-icons/Files01Icon";
 import {
   BalanceCard,
   InviteFriendCard,
   LinkedCard,
   SAVED_PAYMENT_METHODS,
+  TRANSACTION_RECORDS,
+  TransactionHistoryItem,
   WalletCTA,
 } from "@/features/wallet";
 
@@ -43,7 +46,7 @@ const Wallet = () => {
       </View>
 
       {/* CONTENTS */}
-      <View className="p-3">
+      <View className="p-3 pb-32">
         <View className="gap-3">
           <BalanceCard />
           <WalletCTA />
@@ -71,6 +74,39 @@ const Wallet = () => {
         {/* INVITE A FRIEND CARD */}
         <View className="mt-10">
           <InviteFriendCard />
+        </View>
+
+        {/* TRANSACTION HISTORY */}
+        <View className="mt-10">
+          <View className="flex-row items-center justify-between">
+            <Text className="text-lg text-muted-foreground font-semibold">
+              Transaction History
+            </Text>
+            <Button
+              icon
+              className="border-b border-accent rounded-none gap-x-1 pb-0.5"
+            >
+              <Text className="text-accent">View All</Text>
+              <HugeiconsIcon
+                icon={Files01Icon}
+                size={15}
+                className="text-accent"
+              />
+            </Button>
+          </View>
+          {TRANSACTION_RECORDS && TRANSACTION_RECORDS.length > 0 ? (
+            <FlatList
+              data={TRANSACTION_RECORDS.slice(0, 10)}
+              renderItem={({ item }) => (
+                <TransactionHistoryItem record={item} />
+              )}
+              keyExtractor={(item) => item.recordId}
+              contentContainerClassName="gap-y-5 mt-3"
+              showsHorizontalScrollIndicator={false}
+            />
+          ) : (
+            <Text>NO TRANSACTION HISTORY</Text>
+          )}
         </View>
       </View>
     </ScrollView>
