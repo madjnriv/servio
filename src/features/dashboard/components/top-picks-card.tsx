@@ -1,5 +1,4 @@
 import { Text, Image } from "react-native";
-import React from "react";
 import {
   Card,
   CardContent,
@@ -42,7 +41,7 @@ export const TopPicksCard = ({ service }: TopPicksProps) => {
           </Text>
         </Text>
 
-        <Button className="w-11 h-11">
+        <Button className="w-11 h-11 bg-primary">
           <Feather name="arrow-up-right" size={20} color={theme.card} />
         </Button>
       </CardContent>
