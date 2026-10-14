@@ -1,5 +1,5 @@
 import { Avatar } from "@/shared/components/avatar";
-import { View, Text, Platform } from "react-native";
+import { View, Text } from "react-native";
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import { UseThemeColor } from "@/shared/hooks/use-theme-color";
 import { Input } from "@/shared/components/input";
@@ -21,10 +21,10 @@ export const Header = ({ name, location, isProvider }: HeaderProps) => {
   return (
     <View
       style={{ paddingTop: insets.top }}
-      className={`bg-primary p-3 rounded-b-[2.5rem] relative`}
+      className={`bg-primary p-3 rounded-b-[2.5rem]`}
     >
       <View className="flex-row justify-between items-center">
-        <View className="flex-row items-center justify-center gap-2">
+        <View className="flex-row items-center justify-center gap-2 ">
           <Avatar
             src={DEFAULT_USER_IMAGE}
             variant="secondary"
@@ -46,6 +46,8 @@ export const Header = ({ name, location, isProvider }: HeaderProps) => {
           <EvilIcons name="bell" size={25} color={theme.primaryForeground} />
         </View>
       </View>
+
+      {/* SEARCH AND PLUS BTN */}
       <View className="flex-row items-center justify-between mt-5">
         <View
           className={` px-3 border border-border/50 bg-input/10 rounded-full flex-row items-center justify-between gap-0.5 ${isProvider ? "w-[85%]" : "w-full"}`}

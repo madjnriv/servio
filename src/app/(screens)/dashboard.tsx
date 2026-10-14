@@ -4,11 +4,8 @@ import { useAuthContext } from "@/shared/hooks/use-auth";
 import { useServices } from "@/shared/hooks/use-services";
 import { useCallback, useEffect } from "react";
 import { View, Keyboard, ScrollView, FlatList, Text } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Dashboard = () => {
-  const insets = useSafeAreaInsets();
-
   const { providerProfile, authUser } = useAuthContext();
   const { services, setServicesContext } = useServices();
   const displayName = authUser?.name.split(" ")[0];
@@ -29,40 +26,38 @@ const Dashboard = () => {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      className="flex-1 bg-primary"
+      className="flex-1 bg-background pb-"
       onStartShouldSetResponder={() => {
         Keyboard.dismiss();
         return false;
       }}
+      stickyHeaderIndices={[0]}
     >
-      <View className="bg-background">
+      <View className="pb-32">
         <Header
           name={displayName ?? "GUEST"}
           isProvider={Boolean(providerProfile?.businessName)}
         />
+        {/* SERVICE CATEGORY */}
+        <View>
+          <ServiceCategories />
+        </View>
 
-        <View className="">
-          {/* SERVICE CATEGORY */}
-          <View>
-            <ServiceCategories />
-          </View>
-
-          {/* TOP PICKS FOR YOU */}
-          <View className="p-3 mt-5 gap-y-5">
-            <Text className="text-foreground text-xl">Top Picks for you</Text>
-            {services && services.length > 0 ? (
-              <FlatList
-                horizontal={true}
-                data={services}
-                renderItem={({ item }) => <TopPicksCard service={item} />}
-                keyExtractor={(item) => item.id}
-                contentContainerClassName="gap-x-3"
-                showsHorizontalScrollIndicator={false}
-              />
-            ) : (
-              <Text>No Service Found. Check in Later</Text>
-            )}
-          </View>
+        {/* TOP PICKS FOR YOU */}
+        <View className="p-3 mt-5 gap-y-5">
+          <Text className="text-foreground text-xl">Top Picks for you</Text>
+          {services && services.length > 0 ? (
+            <FlatList
+              horizontal={true}
+              data={services}
+              renderItem={({ item }) => <TopPicksCard service={item} />}
+              keyExtractor={(item) => item.id}
+              contentContainerClassName="gap-x-3"
+              showsHorizontalScrollIndicator={false}
+            />
+          ) : (
+            <Text>No Service Found. Check in Later</Text>
+          )}
         </View>
       </View>
     </ScrollView>
