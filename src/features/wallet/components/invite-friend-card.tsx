@@ -15,19 +15,19 @@ export const InviteFriendCard = () => {
       <View>
         <CardHeader>
           <CardTitle className="pr-14">
-            <Text className="text-foreground/80 text-wrap">
+            <Text className="text-foreground/80 text-wrap text-lg">
               Invite a friend and get $10 in your Servio wallet
             </Text>
           </CardTitle>
         </CardHeader>
-        <Button icon className="border border-foreground/80 w-40 py-2 gap-x-2">
-          <Text className="text-foreground/80 font-semibold text-sm">
+        <Button icon className="bg-primary/80 w-40 py-2 gap-x-2">
+          <Text className="text-primary-foreground/80 font-semibold text-sm">
             {" "}
             Share Invite
           </Text>
           <HugeiconsIcon
             icon={Sent02Icon}
-            className="text-foreground/80"
+            className="text-primary-foreground/80"
             size={20}
           />
         </Button>

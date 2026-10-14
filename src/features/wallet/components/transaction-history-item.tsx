@@ -4,7 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react-native";
 import GiftIcon from "@hugeicons/core-free-icons/GiftIcon";
 import ArrowDownLeft01Icon from "@hugeicons/core-free-icons/ArrowDownLeft01Icon";
 import ArrowUpRight03Icon from "@hugeicons/core-free-icons/ArrowUpRight03Icon";
-import CreditCardValidationIcon from "@hugeicons/core-free-icons/CreditCardValidationIcon";
+import ArrowDataTransferHorizontalIcon from "@hugeicons/core-free-icons/ArrowDataTransferHorizontalIcon";
 
 interface TransactionHistoryItemProps {
   record: TransactionRecord;
@@ -34,7 +34,7 @@ export const TransactionHistoryItem = ({
         return (
           <View className="bg-primary/10 w-10 h-10 items-center justify-center rounded-full">
             <HugeiconsIcon
-              icon={CreditCardValidationIcon}
+              icon={ArrowDataTransferHorizontalIcon}
               size={20}
               className="text-primary"
             />
@@ -54,5 +54,65 @@ export const TransactionHistoryItem = ({
         return null;
     }
   };
-  return <View>{recordItemIcon()} </View>;
+  const transactionTitle = (() => {
+    if (record.kind === "SERVICE_PAYMENT") {
+      return `${record.info.service.title} service`;
+    }
+
+    if (record.kind === "REWARD") {
+      return record.info.reward.title;
+    }
+
+    if (record.kind === "BANK_WITHDRAWAL") {
+      return `Bank Withdrawal to ${record.info.destination.accountName}`;
+    }
+
+    return "Wallet Top Up";
+  })();
+  const transactionDate = new Date(record.occurredAt);
+  const transactionSign = (() => {
+    if (
+      record.kind === "SERVICE_PAYMENT" ||
+      record.kind === "BANK_WITHDRAWAL"
+    ) {
+      return "-";
+    }
+    return "+";
+  })();
+
+  return (
+    <View className="flex-row items-center gap-3 w-full">
+      {recordItemIcon()}
+      <View className="flex-row items-baseline justify-between flex-1">
+        {/* TRANSACTION DATE AND TITLE */}
+        <View>
+          <Text className="text-foreground/80 font-medium">
+            {transactionTitle}
+          </Text>
+          <Text className="text-sm text-muted-foreground/50">
+            {transactionDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </Text>
+        </View>
+
+        {/* AMOUNT */}
+        <View>
+          <Text
+            className={`font-medium ${
+              record.kind === "SERVICE_PAYMENT" ||
+              record.kind === "BANK_WITHDRAWAL"
+                ? "text-destructive"
+                : "text-green-500"
+            }`}
+          >
+            {transactionSign} {record.currencyCode ? "$" : null}
+            {record.totalAmount}
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
 };

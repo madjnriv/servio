@@ -82,16 +82,8 @@ const Wallet = () => {
             <Text className="text-lg text-muted-foreground font-semibold">
               Transaction History
             </Text>
-            <Button
-              icon
-              className="border-b border-accent rounded-none gap-x-1 pb-0.5"
-            >
-              <Text className="text-accent">View All</Text>
-              <HugeiconsIcon
-                icon={Files01Icon}
-                size={15}
-                className="text-accent"
-              />
+            <Button icon className="bg-accent/10 px-3 py-0.5 gap-x-1 pb-0.5">
+              <Text className="text-accent text-sm font-medium">View All</Text>
             </Button>
           </View>
           {TRANSACTION_RECORDS && TRANSACTION_RECORDS.length > 0 ? (
@@ -101,7 +93,7 @@ const Wallet = () => {
                 <TransactionHistoryItem record={item} />
               )}
               keyExtractor={(item) => item.recordId}
-              contentContainerClassName="gap-y-5 mt-3"
+              contentContainerClassName="gap-y-5 mt-5"
               showsHorizontalScrollIndicator={false}
             />
           ) : (
