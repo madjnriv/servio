@@ -56,6 +56,12 @@ export const TransactionHistoryItem = ({
   };
   const transactionTitle = (() => {
     if (record.kind === "SERVICE_PAYMENT") {
+      if (
+        record.info.service.title.includes("Service") ||
+        record.info.service.title.includes("service")
+      ) {
+        return record.info.service.title;
+      }
       return `${record.info.service.title} service`;
     }
 
@@ -64,7 +70,7 @@ export const TransactionHistoryItem = ({
     }
 
     if (record.kind === "BANK_WITHDRAWAL") {
-      return `Bank Withdrawal to ${record.info.destination.accountName}`;
+      return `Withdrawal to ${record.info.destination.accountName}`;
     }
 
     return "Wallet Top Up";
