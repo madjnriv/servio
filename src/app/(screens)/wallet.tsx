@@ -40,7 +40,7 @@ const Wallet = () => {
           </Button>
 
           <Text
-            style={{ fontFamily: "title-extrabold" }}
+            style={{ fontFamily: "header-extrabold" }}
             className="text-lg font-semibold text-muted-foreground"
           >
             Wallet & Transactions
@@ -57,7 +57,10 @@ const Wallet = () => {
 
         {/* LINKED CARDS */}
         <View className="mt-10">
-          <Text className="text-lg text-muted-foreground font-semibold">
+          <Text
+            style={{ fontFamily: "title-bold" }}
+            className="text-lg text-muted-foreground"
+          >
             Linked Debit cards & Banks
           </Text>
           {SAVED_PAYMENT_METHODS && SAVED_PAYMENT_METHODS.length > 0 ? (

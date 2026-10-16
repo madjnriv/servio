@@ -9,45 +9,41 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
 import {
-  useFonts,
   SourceCodePro_200ExtraLight,
-  SourceCodePro_200ExtraLight_Italic,
   SourceCodePro_300Light,
-  SourceCodePro_300Light_Italic,
   SourceCodePro_400Regular,
-  SourceCodePro_400Regular_Italic,
   SourceCodePro_500Medium,
-  SourceCodePro_500Medium_Italic,
   SourceCodePro_600SemiBold,
-  SourceCodePro_600SemiBold_Italic,
   SourceCodePro_700Bold,
-  SourceCodePro_700Bold_Italic,
   SourceCodePro_800ExtraBold,
-  SourceCodePro_800ExtraBold_Italic,
   SourceCodePro_900Black,
-  SourceCodePro_900Black_Italic,
 } from "@expo-google-fonts/source-code-pro";
+import {
+  Cabin_400Regular,
+  Cabin_500Medium,
+  Cabin_600SemiBold,
+  Cabin_700Bold,
+} from "@expo-google-fonts/cabin";
+import { TenorSans_400Regular } from "@expo-google-fonts/tenor-sans";
 
 const RootLayout = () => {
   const insets = useSafeAreaInsets();
   let [fontsLoaded] = useFonts({
-    "title-extralight": SourceCodePro_200ExtraLight,
-    SourceCodePro_200ExtraLight_Italic,
-    "title-light": SourceCodePro_300Light,
-    SourceCodePro_300Light_Italic,
-    "title-regular": SourceCodePro_400Regular,
-    SourceCodePro_400Regular_Italic,
-    "title-medium": SourceCodePro_500Medium,
-    SourceCodePro_500Medium_Italic,
-    "title-semibold": SourceCodePro_600SemiBold,
-    SourceCodePro_600SemiBold_Italic,
-    "title-bold": SourceCodePro_700Bold,
-    SourceCodePro_700Bold_Italic,
-    "title-extrabold": SourceCodePro_800ExtraBold,
-    SourceCodePro_800ExtraBold_Italic,
-    "title-black": SourceCodePro_900Black,
-    SourceCodePro_900Black_Italic,
+    "header-extralight": SourceCodePro_200ExtraLight,
+    "header-light": SourceCodePro_300Light,
+    "header-regular": SourceCodePro_400Regular,
+    "header-medium": SourceCodePro_500Medium,
+    "header-semibold": SourceCodePro_600SemiBold,
+    "header-bold": SourceCodePro_700Bold,
+    "header-extrabold": SourceCodePro_800ExtraBold,
+    "header-black": SourceCodePro_900Black,
+    "title-regular": Cabin_400Regular,
+    "title-medium": Cabin_500Medium,
+    "title-semibold": Cabin_600SemiBold,
+    "title-bold": Cabin_700Bold,
+    "body-regular": TenorSans_400Regular,
   });
 
   if (!fontsLoaded) {

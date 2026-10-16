@@ -15,13 +15,16 @@ export const InviteFriendCard = () => {
       <View>
         <CardHeader>
           <CardTitle className="pr-14">
-            <Text className="text-foreground/80 text-wrap text-lg">
+            <Text
+              // style={{ fontFamily: "body-regular" }}
+              className="text-foreground/80 text-wrap text-xl font-title-regular"
+            >
               Invite a friend and get $10 in your Servio wallet
             </Text>
           </CardTitle>
         </CardHeader>
         <Button icon className="bg-primary/80 w-40 py-2 gap-x-2">
-          <Text className="text-primary-foreground/80 font-semibold text-sm">
+          <Text className="text-primary-foreground/80 font-title-bold text-sm">
             {" "}
             Share Invite
           </Text>

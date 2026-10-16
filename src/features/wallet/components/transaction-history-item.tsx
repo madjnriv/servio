@@ -92,10 +92,10 @@ export const TransactionHistoryItem = ({
       <View className="flex-row items-baseline justify-between flex-1">
         {/* TRANSACTION DATE AND TITLE */}
         <View>
-          <Text className="text-foreground/80 font-medium">
+          <Text className="text-foreground/80 font-title-regular">
             {transactionTitle}
           </Text>
-          <Text className="text-sm text-muted-foreground/50">
+          <Text className="text-sm text-muted-foreground/50 font-title-regular">
             {transactionDate.toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
@@ -107,7 +107,7 @@ export const TransactionHistoryItem = ({
         {/* AMOUNT */}
         <View>
           <Text
-            className={`font-medium ${
+            className={`font-title-bold ${
               record.kind === "SERVICE_PAYMENT" ||
               record.kind === "BANK_WITHDRAWAL"
                 ? "text-destructive"
