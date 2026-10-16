@@ -39,7 +39,10 @@ const Wallet = () => {
             />
           </Button>
 
-          <Text className="text-lg font-semibold text-muted-foreground">
+          <Text
+            style={{ fontFamily: "title-extrabold" }}
+            className="text-lg font-semibold text-muted-foreground"
+          >
             Wallet & Transactions
           </Text>
         </View>
